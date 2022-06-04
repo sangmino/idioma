@@ -6,8 +6,8 @@
 ]{book}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{iftex}
-\ifPDFTeX
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -41,6 +41,46 @@
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -69,7 +109,7 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 \usepackage{booktabs}
-\ifLuaTeX
+\ifluatex
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \usepackage[]{natbib}
@@ -77,7 +117,7 @@
 
 \title{NLP Galore}
 \author{Various Sources}
-\date{2022-03-03}
+\date{2022-06-05}
 
 \begin{document}
 \maketitle
@@ -97,39 +137,198 @@ Please \textbf{do not} cite.
 \part*{BASICS OF NLP}\label{part-basics-of-nlp}}
 \addcontentsline{toc}{part}{BASICS OF NLP}
 
+\hypertarget{dictionary-based-methods}{%
+\chapter{Dictionary-Based Methods}\label{dictionary-based-methods}}
+
+\hypertarget{regression-based-methods}{%
+\chapter{Regression-Based Methods}\label{regression-based-methods}}
+
+\hypertarget{bag-of-words-tf-idf}{%
+\chapter{Bag of Words: TF-IDF}\label{bag-of-words-tf-idf}}
+
 \hypertarget{word-tokenization}{%
-\chapter{Word Tokenization}\label{word-tokenization}}
+\section{Word Tokenization}\label{word-tokenization}}
+
+Tokenizers can easily become complex.
+
+\hypertarget{implementing-tokenization}{%
+\subsection{Implementing Tokenization}\label{implementing-tokenization}}
+
+Several Python libraries implement tokenizers, each with its own advantages and disadvantages:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  spaCy---Accurate , flexible, fast, Python
+\item
+  Stanford CoreNLP---More accurate, less flexible, fast, depends on Java 8
+\item
+  NLTK---Standard used by many NLP contests and comparisons, popular, Python
+\end{enumerate}
+
+NLTK and Stanford CoreNLP have been around the longest and are the most widely used for comparison of NLP algorithms in academic papers.
+
+\hypertarget{n-grams}{%
+\subsubsection{N-Grams}\label{n-grams}}
+
+An n-gram is a sequence containing up to n elements that have been extracted from a sequence of those elements, usually a string.
+
+When a sequence of tokens is vectorized into a bag-of-words vector, it loses a lot of the meaning inherent in the order of those words. By extending your concept of a token to include multiword tokens, n-grams, your NLP pipeline can retain much of the meaning inherent in the order of words in your statements.
+
+\hypertarget{techniques-for-normalizing-the-vocabulary}{%
+\subsubsection{Techniques for Normalizing the Vocabulary}\label{techniques-for-normalizing-the-vocabulary}}
+
+One can normalize the vocabulary so that tokens that mean similar things are combined into a single, normalized form. Doing so reduces the number of tokens you need to retain in your vocabulary and also improves the association of meaning across those different ``spellings'' of a token or n-gram in your corpus
+
+\textbf{Case Folding}
+
+Case folding is when you consolidate multiple ``spellings'' of a word that differ only in their capitalization. We can normalize the capitalization using list comprehension: \texttt{{[}x.lower()\ for\ x\ in\ tokens{]}}
+
+\textbf{Stemming}
+
+Another common vocabulary normalization technique is to eliminate the small mean- ing differences of pluralization or possessive endings of words, or even various verb forms. Stemming removes suffixes from words in an attempt to combine words with similar meanings together under their common stem. A stem isn't required to be a properly spelled word, but merely a token, or label, representing several possible spellings of a word.
+
+It's important to note that stemming could greatly reduce the ``precision'' score for your search engine,
+because it might return many more irrelevant documents along with the relevant ones.
+
+Two of the most popular stemming algorithms are the Porter and Snowball stemmers. The Porter stemmer is named for the computer scientist Martin Porter. Porter is also responsible for enhancing the Porter stemmer to create the Snowball stemmer.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ nltk.stem.porter}
+\ImportTok{import}\NormalTok{ PorterStemmer}
+\NormalTok{stemmer }\OperatorTok{=}\NormalTok{ PorterStemmer()}
+\CommentTok{\textquotesingle{} \textquotesingle{}}\NormalTok{.join([stemmer.stem(w).strip(}\StringTok{"\textquotesingle{}"}\NormalTok{) }\ControlFlowTok{for}\NormalTok{ w }\KeywordTok{in} \StringTok{"dish washer\textquotesingle{}s washed dishes"}\NormalTok{.split()]))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Lemmatization}
+
+If you have access to information about connections between the meanings of various words, you might be able to associate several words together even if their spelling is quite different. This more extensive normalization down to the semantic root of a word---its lemma---is called lemmatization.
+
+Lemmatization is a potentially more accurate way to normalize a word than stemming or case normalization because it takes into account a word's meaning. A lemmatizer uses a knowledge base of word synonyms and word endings to ensure that only words that mean similar things are consolidated into a single token.
+
+So lemmatizers are better than stemmers for most applications. Stemmers are only really used in large-scale information retrieval applications (keyword search).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nltk.download(}\StringTok{\textquotesingle{}wordnet\textquotesingle{}}\NormalTok{)}
+\ImportTok{from}\NormalTok{ nltk.stem }\ImportTok{import}\NormalTok{ WordNetLemmatizer}
+\NormalTok{lemmatizer }\OperatorTok{=}\NormalTok{ WordNetLemmatizer()}
+\NormalTok{lemmatizer.lemmatize(}\StringTok{"better"}\NormalTok{, pos}\OperatorTok{=}\StringTok{"a"}\NormalTok{) }\CommentTok{\# if POS is not specified, it assumes noun}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{bag-of-words}{%
+\section{Bag of Words}\label{bag-of-words}}
+
+A bag of words is a representation of text that describes the occurrence of words within a document.
+
+We just keep track of word counts and disregard the grammatical details and the word order. It is called a ``bag'' of words because any information about the order or structure of words in the document is discarded. The model is only concerned with whether known words occur in the document, not where in the document.
+
+\hypertarget{n-gram-adaptation}{%
+\subsection{N-Gram Adaptation}\label{n-gram-adaptation}}
+
+In general, bigrams make tokens more understandable. Suppose we have two sentences:
+
+\begin{itemize}
+\tightlist
+\item
+  Sentence 1: ``This is a good job. I will not miss it for anything''
+\item
+  Sentence 2: ''This is not good at all''
+\end{itemize}
+
+and let us take the vocabulary of 5 words only: ``good'', ``job'', ``miss'', ``not'', and ``all.''
+
+In this case, the respective vectors for these sentences are:
+
+\begin{itemize}
+\tightlist
+\item
+  Sentence 1: ``This is a good job. I will not miss it for anything''=\textbf{{[}1,1,1,1,0{]}}
+\item
+  Sentence 2: ''This is not good at all''=\textbf{{[}1,0,0,1,1{]}}
+\end{itemize}
+
+Sentence 2 is a negative sentence, yet this distinction is not reflected in the vectors.
+
+Now, suppose instead we use bigrams, in which case Sentence 2 can be broken into: ``This is'', ``is not'', ``not good'', ``good at'', and ``at all.'' In this case, the model can differentiate between sentence 1 and sentence 2.
 
 \hypertarget{tf-idf}{%
-\chapter{TF-IDF}\label{tf-idf}}
+\section{TF-IDF}\label{tf-idf}}
 
-\hypertarget{semantic-analysis}{%
-\chapter{Semantic Analysis}\label{semantic-analysis}}
+TF-IDF is intended to reflect how relevant a term is in a given document. It is computed by multiplying two different metrics:
 
-\hypertarget{word2vec}{%
-\chapter{Word2vec}\label{word2vec}}
+\begin{itemize}
+\item
+  \textbf{Term Frequency (TF)} of a word \(t\) in document \(d\) is given as
+  \[
+  tf(t,d) = \frac{f_{t,d}}{\sum_{t'\in d} f_{t',d}}
+  \]
+  where \(f_{t,d}\) is the raw count of a term in a document. The denominator is the total number of terms in document \(d\).
+\item
+  \textbf{Inverse Document Frequency (IDF)} of a word \(t\) in a set of documents \(D\) is given as
+  \[
+  idf(t,D) = \log\frac{N}{|\{d\in D:t\in d\}|}
+  \]
+  where \(N=|D|\) and the denominator is the number of documents where the term \(t\) appears.
+\end{itemize}
+
+Then TF-IDF is calculated as:
+\[
+tfidf(t,d,D) = tf(t,d)\times idf(t,D)
+\]
+A high weight in TF-IDF is reached by a high term frequency (in the given document) and a low document frequency of the term in the whole collection of documents
+
+\hypertarget{limitations-of-bag-of-words}{%
+\section{Limitations of Bag of Words}\label{limitations-of-bag-of-words}}
+
+Although Bag-of-Words is quite efficient and easy to implement, there still are disadvantages.
+
+\textbf{First, the model ignores the location information of the word.} The location information is a piece of very important information in the text. For example ``today is off'' and ``Is today off'', have the exact same vector representation in the BoW model.
+
+\textbf{Second, the model ignores the semantics of the word.} For example, words `soccer' and `football' are often used in the same context. However, the vectors corresponding to these words are quite different in the bag of words model.
+
+\textbf{Third, the range of vocabulary is a big issue faced by the Bag-of-Words model.} If the model comes across a new word, it ends up ignoring the word.
+
+\hypertarget{basic-word-embeddings-word2vec-glove}{%
+\chapter{Basic Word Embeddings: Word2Vec \& Glove}\label{basic-word-embeddings-word2vec-glove}}
+
+\hypertarget{topic-modelling-lsa-lda}{%
+\chapter{Topic Modelling: LSA \& LDA}\label{topic-modelling-lsa-lda}}
+
+\hypertarget{sequence-models-rnns-and-lstms}{%
+\chapter{Sequence Models: RNNs and LSTMs}\label{sequence-models-rnns-and-lstms}}
+
+\hypertarget{attention-models-and-transformers}{%
+\chapter{Attention Models and Transformers}\label{attention-models-and-transformers}}
+
+\hypertarget{other-useful-methods-for-textual-analysis}{%
+\chapter{Other Useful Methods for Textual Analysis}\label{other-useful-methods-for-textual-analysis}}
 
 \hypertarget{convolutional-neural-networks-cnns}{%
-\chapter{Convolutional Neural Networks (CNNs)}\label{convolutional-neural-networks-cnns}}
+\section{Convolutional Neural Networks (CNNs)}\label{convolutional-neural-networks-cnns}}
 
-\hypertarget{recurrent-neural-networks-rnns}{%
-\chapter{Recurrent Neural Networks (RNNs)}\label{recurrent-neural-networks-rnns}}
+\hypertarget{hidden-markov-models-hmms}{%
+\section{Hidden Markov Models (HMMs)}\label{hidden-markov-models-hmms}}
 
-\hypertarget{recurrent-neural-networks-rnns-1}{%
-\chapter{Recurrent Neural Networks (RNNs)}\label{recurrent-neural-networks-rnns-1}}
+\hypertarget{part-applications-in-econfinance}{%
+\part*{APPLICATIONS IN ECON/FINANCE}\label{part-applications-in-econfinance}}
+\addcontentsline{toc}{part}{APPLICATIONS IN ECON/FINANCE}
 
-\hypertarget{long-short-term-memory-networks-lstms}{%
-\chapter{Long Short-Term Memory Networks (LSTMs)}\label{long-short-term-memory-networks-lstms}}
+\hypertarget{sentiment-analysis}{%
+\chapter{Sentiment Analysis}\label{sentiment-analysis}}
 
-\hypertarget{sequence-to-sequence-models-and-attention}{%
-\chapter{Sequence-to-Sequence Models and Attention}\label{sequence-to-sequence-models-and-attention}}
+\hypertarget{part-code-snippets}{%
+\part*{CODE SNIPPETS}\label{part-code-snippets}}
+\addcontentsline{toc}{part}{CODE SNIPPETS}
 
-\hypertarget{part-applications-in-economics}{%
-\part*{APPLICATIONS IN ECONOMICS}\label{part-applications-in-economics}}
-\addcontentsline{toc}{part}{APPLICATIONS IN ECONOMICS}
+\hypertarget{data-scraping}{%
+\chapter{Data Scraping}\label{data-scraping}}
 
-\hypertarget{dictionary-methods}{%
-\chapter{Dictionary Methods}\label{dictionary-methods}}
+\hypertarget{data-cleaning}{%
+\chapter{Data Cleaning}\label{data-cleaning}}
 
   \bibliography{book.bib,packages.bib}
 
