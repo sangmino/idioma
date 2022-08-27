@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Topic Modelling: LDA | NLP Galore</title>
+<meta name="author" content="Various Sources">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Topic Modelling: LDA | NLP Galore">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Topic Modelling: LDA | NLP Galore">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="The goal of topic modeling is to extract latent topics from observed documents. For example, we may have a collection of news articles where any given article may discuss the economy, geopolitics,...">
+<meta property="og:description" content="The goal of topic modeling is to extract latent topics from observed documents. For example, we may have a collection of news articles where any given article may discuss the economy, geopolitics,...">
+<meta name="twitter:description" content="The goal of topic modeling is to extract latent topics from observed documents. For example, we may have a collection of news articles where any given article may discuss the economy, geopolitics,...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">NLP Galore</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li class="book-part">BASICS OF NLP</li>
+<li><a class="" href="dictionary-based-methods.html"><span class="header-section-number">2</span> Dictionary-Based Methods</a></li>
+<li><a class="" href="regression-based-methods.html"><span class="header-section-number">3</span> Regression-Based Methods</a></li>
+<li><a class="" href="bag-of-words-tf-idf.html"><span class="header-section-number">4</span> Bag of Words: TF-IDF</a></li>
+<li><a class="" href="basic-word-embeddings-word2vec-glove.html"><span class="header-section-number">5</span> Basic Word Embeddings: Word2Vec &amp; Glove</a></li>
+<li><a class="active" href="topic-modelling-lda.html"><span class="header-section-number">6</span> Topic Modelling: LDA</a></li>
+<li><a class="" href="sequence-models-rnns-and-lstms.html"><span class="header-section-number">7</span> Sequence Models: RNNs and LSTMs</a></li>
+<li><a class="" href="attention-models-and-transformers.html"><span class="header-section-number">8</span> Attention Models and Transformers</a></li>
+<li><a class="" href="pretrained-models-and-fine-tuning.html"><span class="header-section-number">9</span> Pretrained Models and Fine-Tuning</a></li>
+<li><a class="" href="other-useful-methods-for-textual-analysis.html"><span class="header-section-number">10</span> Other Useful Methods for Textual Analysis</a></li>
+<li class="book-part">APPLICATIONS IN ECON/FINANCE</li>
+<li><a class="" href="sentiment-analysis.html"><span class="header-section-number">11</span> Sentiment Analysis</a></li>
+<li class="book-part">CODE SNIPPETS</li>
+<li><a class="" href="data-scraping.html"><span class="header-section-number">12</span> Data Scraping</a></li>
+<li><a class="" href="data-cleaning.html"><span class="header-section-number">13</span> Data Cleaning</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="topic-modelling-lda" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Topic Modelling: LDA<a class="anchor" aria-label="anchor" href="#topic-modelling-lda"><i class="fas fa-link"></i></a>
+</h1>
+<p>The goal of topic modeling is to extract latent topics from observed documents. For example, we may have a collection of news articles where any given article may discuss the economy, geopolitics, or both; the goal of topic modeling is to extract these topics in an unsupervised manner. Alternatively one can also think of topic modeling as a dimension reduction technique; documents are high-dimensional objects containing a large collection of words, and we would like to map them to a lower-dimensional topic space.</p>
+<p>A popular topic model is the Latent Dirichlet Allocation (LDA) which was first proposed by <a href="https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf">Blei et al. (2003)</a>. The LDA is an unsupervised technique, which takes as its input a corpus of documents and outputs latent topics i.e. factors that load on words. In this chapter, we will cover LDAs.</p>
+<div id="notation-and-terminology" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Notation and Terminology<a class="anchor" aria-label="anchor" href="#notation-and-terminology"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>
+<strong>Words</strong> indexed <span class="math inline">\(1,\dots,V\)</span> are represented by the basis vector—the collection of words that make up a corpus will be referred to as the vocabulary.</li>
+<li>
+<strong>Topics</strong> are denoted <span class="math inline">\(z_1,\dots,z_K\)</span>. In all topic models discussed here, the researcher will need to specify the number of <span class="math inline">\(K\)</span> latent topics we are trying to extract.</li>
+<li>
+<strong>Document</strong> <span class="math inline">\(m\)</span> is represented by a sequence of sequence of <span class="math inline">\(N\)</span> words, <span class="math inline">\(d_m = \{w_1,w_2,\dots,w_N\}\)</span> e.g. a newspaper article. <em>For simplicity, unless otherwise stated, throughout this chapter we are going to assume the length of documents is exactly <span class="math inline">\(N\)</span> words.</em>
+</li>
+<li>
+<strong>Corpus</strong> is composed of a collection of <span class="math inline">\(M\)</span> documents <span class="math inline">\(\mathcal{D}=\{d_1,\dots, d_M\}\)</span> e.g. the New York Times.</li>
+<li>
+<strong>Document-term matrix</strong> is a way to describe how often a words occur across documents in the corpus <span class="math inline">\(X\in \mathbb{R}^{M\times V}\)</span>.
+<ul>
+<li>A very basic version would involve simply doing a frequency count of all possible <span class="math inline">\(V\)</span> words in each of the <span class="math inline">\(M\)</span> documents.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="models-that-preceded-the-lda" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Models that preceded the LDA:<a class="anchor" aria-label="anchor" href="#models-that-preceded-the-lda"><i class="fas fa-link"></i></a>
+</h2>
+<p>Before diving into LDAs, it is useful to cover a couple of models that preceded the LDA. This serves three pedagogical purposes. Firstly, it helps see the deep parallels of topic modeling techniques with more commonly used dimension reduction methods such as principle component analysis (PCA). Secondly, it motivates the exact challenges faced by past methods LDAs were trying to address, and also shows the challenges that still remain.</p>
+<div id="latent-semantic-models-lsa" class="section level3" number="6.2.1">
+<h3>
+<span class="header-section-number">6.2.1</span> Latent Semantic Models (LSA)<a class="anchor" aria-label="anchor" href="#latent-semantic-models-lsa"><i class="fas fa-link"></i></a>
+</h3>
+<p>One way to think about topic modeling is that it is trying to get a low-dimensional representation of the documents, where these low-dimensional representations can be thought of as topics. Hence, one might attempt to simply apply a PCA to the document-term matrix, and interpret the principle components as topics. This is precisely the idea behind LSAs.</p>
+<p>LSA applies a <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition">Singular Value Decomposition (SVD)</a> to the document-term matrix and interprets the extracted factors as topics. While this method is excellent for dimension reduction, it does not allow for interpretability, since PCA only identifies the loadings up to orthogonal rotations. Additionally, SVDs require a large amount of data to get reasonable estimates. For both of these reasons, researchers decided to put a more parametric structure on the problem.</p>
+</div>
+<div id="probabilistic-latent-semantic-models-plsa" class="section level3" number="6.2.2">
+<h3>
+<span class="header-section-number">6.2.2</span> Probabilistic Latent Semantic Models (pLSA)<a class="anchor" aria-label="anchor" href="#probabilistic-latent-semantic-models-plsa"><i class="fas fa-link"></i></a>
+</h3>
+<p>The next iteration on the LSA put more structure on the problem by using a two-level hierarchical Bayesian set-up to model the data generating process of a document. The DGP provides a joint distribution for documents, words, and topics. We then try to estimate the posterior of latent topics conditional on observed documents and words. We can then use this to map documents to topics.</p>
+<p>This parameterization has direct parallels to the SVD (see great explanation <a href="https://medium.com/nanonets/topic-modeling-with-lsa-psla-lda-and-lda2vec-555ff65b0b05">here</a>), and it allows for greater interpretability and more efficient estimation. It is worth discussing some of the specifics of the pLSA, as the LDA directly builds on it.</p>
+<p>The pLSA’s DGP attempts to capture two key properties of how we intuitively think of documents, topics and words are related: (i) a document can be composed of multiple topics (e.g. an article can be about both economics and geopolitics), and (ii) topics tend to be associated with a set of words (e.g. economics is associated with words like GDP, inflation, currency, etc.). The pLSA captures the former by modeling each document as a multinomial distribution from which topics are drawn—-the document-specific multinomial parameter captures the document-specific topic distribution. Similarly, it captures the latter by modeling words as being drawn from topic-specific multinomial distributions. More formally, the DGP for a given document <span class="math inline">\(m\)</span> containing <span class="math inline">\(N\)</span> words are as follows,</p>
+<ol style="list-style-type: decimal">
+<li>For each <span class="math inline">\(N\)</span> words <span class="math inline">\(w_n\)</span> in document <span class="math inline">\(m\)</span>:
+<ol style="list-style-type: decimal">
+<li>Choose topic <span class="math inline">\(z_{n} \sim Multinomial(\theta_m)\)</span>.</li>
+<li>Choose word <span class="math inline">\(w_n\)</span> from the multinomial <span class="math inline">\(p(w_n|z_n;\beta)\)</span> where <span class="math inline">\(\beta\)</span> is a <span class="math inline">\(V\times K\)</span> a matrix such that each column is a topic-specific word distribution.</li>
+</ol>
+</li>
+</ol>
+<p>The pLSA algorithm can be represented using a flow chart (augmented from <a href="https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf">Blei et al. (2003)</a>) can be graphically represented as follows,</p>
+<div class="inline-figure"><img src="Figures/image-20220623153921254.png" alt="image-20220623153921254" style="zoom:33%;"></div>
+<p>pLSA’s were a major improvement on the LSA. Namely, by assuming the latent topics were drawn from multinomial distributions, they were able to uniquely identify the topic loadings and allow for greater interpretability. However, a major limitation of the pLSA is that it requires estimating the multinomial parameter <span class="math inline">\(\theta_m\)</span> for each document separately. As a result, the pLSA requires each document to have a large number of words to estimate these parameters consistently. Hence, in practice, the pLSA can be quite unstable. LDA’s built on top of pLSAs to solve this issue.</p>
+</div>
+</div>
+<div id="latent-dirichlet-allocation-lda" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Latent Dirichlet Allocation (LDA)<a class="anchor" aria-label="anchor" href="#latent-dirichlet-allocation-lda"><i class="fas fa-link"></i></a>
+</h2>
+<p>To more efficiently use the data across documents, LDAs assume that the document-specific distribution is drawn from a Dirichlet distribution <span class="math inline">\(\theta_m \sim Dir(\alpha)\)</span>. This Bayesian hierarchical structure helps parameter shrinkage; <span class="math inline">\(\theta_m\)</span> for documents with fewer words is shrunk towards the population mean. This makes the model more stable than pLSA.</p>
+<p>The LDA algorithm is as follows,</p>
+<ol style="list-style-type: decimal">
+<li><p>For each document <span class="math inline">\(m\)</span> choose <span class="math inline">\(\theta_m \sim Dir(\alpha)\)</span></p></li>
+<li>
+<p>For each <span class="math inline">\(N\)</span> words <span class="math inline">\(w_n\)</span> in document <span class="math inline">\(m\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><p>Choose topic <span class="math inline">\(z_{n} \sim Multinomial(\theta)\)</span>.</p></li>
+<li><p>Choose word <span class="math inline">\(w_n\)</span> from the multinomial <span class="math inline">\(p(w_n|z_n;\beta)\)</span> where <span class="math inline">\(\beta\)</span> is a <span class="math inline">\(V\times K\)</span> a matrix such that each column is a topic-specific word distribution.</p></li>
+</ol>
+</li>
+</ol>
+<p>Similarly, this can be graphically represented as follows (from <a href="https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf">Blei et al. (2003)</a>).</p>
+<div class="inline-figure"><img src="Figures/image-20220623153734245.png" alt="image-20220623153734245" style="zoom:33%;"></div>
+<p>Hopefully, it is clear from both the algorithm and the figures, that the main difference between LDAs and pLSAs is the additional assumption that <span class="math inline">\(\theta_m\)</span> is drawn from a Dirichlet distribution.</p>
+<div id="challenges-of-working-with-lda" class="section level3" number="6.3.1">
+<h3>
+<span class="header-section-number">6.3.1</span> Challenges of working with LDA<a class="anchor" aria-label="anchor" href="#challenges-of-working-with-lda"><i class="fas fa-link"></i></a>
+</h3>
+<p>Note that while the Dirchilet prior helps with shrinkage of the topic-document distribution, we are still left with the issue that the number of parameters grows as the vocabulary growth— β is V × K and α is V × 1. Hence, to make LDA’s work in practice considerable pre-processing of the data is needed to ensure V isn’t too big and the model can be estimated easily.</p>
+<p>More recently, methods combining word embeddings and LDAs have been proposed to solve this challenge.</p>
+</div>
+<div id="intractable-likelihood-and-estimation" class="section level3" number="6.3.2">
+<h3>
+<span class="header-section-number">6.3.2</span> Intractable likelihood and estimation<a class="anchor" aria-label="anchor" href="#intractable-likelihood-and-estimation"><i class="fas fa-link"></i></a>
+</h3>
+<p>The probability of observing given words in terms of model parameters is,</p>
+<p><span class="math display">\[p(\mathbf{w} \mid \alpha, \beta)=\frac{\Gamma\left(\sum_{i} \alpha_{i}\right)}{\prod_{i} \Gamma\left(\alpha_{i}\right)} \int\left(\prod_{i=1}^{k} \theta_{i}^{\alpha_{i}-1}\right)\left(\prod_{n=1}^{N} \sum_{i=1}^{k} \prod_{j=1}^{V}\left(\theta_{i} \beta_{i j}\right)^{w_{n}^{j}}\right) d \theta\]</span></p>
+<p>As you can see this is quite messy, which makes it intractable to find an analytical expression for model parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. Hence, we need to rely on numerical methods such as MCMC or variational inference (VI). As is standard in many ML settings, due to the large dimensionality of the problem, the preferred method for estimating LDAs is VI.</p>
+</div>
+<div id="packages-for-implementing-the-standard-lda" class="section level3" number="6.3.3">
+<h3>
+<span class="header-section-number">6.3.3</span> Packages for implementing the standard LDA<a class="anchor" aria-label="anchor" href="#packages-for-implementing-the-standard-lda"><i class="fas fa-link"></i></a>
+</h3>
+<p>Python has packages that can implement LDAs out of the box,</p>
+<ul>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.LatentDirichletAllocation.html">sklearn.decomposition.LatentDirichletAllocation</a></li>
+<li><a href="https://radimrehurek.com/gensim/models/ldamodel.html">gensim.models.ldamodel.LdaModel</a></li>
+</ul>
+</div>
+<div id="extensions-to-the-standard-lda" class="section level3" number="6.3.4">
+<h3>
+<span class="header-section-number">6.3.4</span> Extensions to the standard LDA<a class="anchor" aria-label="anchor" href="#extensions-to-the-standard-lda"><i class="fas fa-link"></i></a>
+</h3>
+<div id="dynamic-lda" class="section level4" number="6.3.4.1">
+<h4>
+<span class="header-section-number">6.3.4.1</span> Dynamic LDA<a class="anchor" aria-label="anchor" href="#dynamic-lda"><i class="fas fa-link"></i></a>
+</h4>
+<p>The LDA assumes the parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are constant over time. However, this may not be an appropriate assumption over longer horizons. For example, the topics being discussed in scientific journals have considerably changed over the last century. A naive method for addressing this issue would be to repeatedly estimate the LDA for a year at a time. However, this approach throws out a lot of useful information, as topics in a given year should be somewhat informative about topics in the following year. Hence, the dynamic LDA was developed <a href="https://dl.acm.org/doi/10.1145/1143844.1143859">Blei and Lafferty (2006)</a>.</p>
+<p>The dynamics LDA attempts to estimate a sequence of parameters <span class="math inline">\((\alpha_t,\beta_t)\)</span>. It essentially connects a many LDA’s together by assuming the <span class="math inline">\(\alpha_t\)</span> and <span class="math inline">\(\beta_t\)</span> evolve as random walked with Gaussian shocks (so can be extracted using Kalman filters). The algorithm is,</p>
+<ol style="list-style-type: decimal">
+<li>Draw topics <span class="math inline">\(\beta_{t} \mid \beta_{t-1} \sim \mathcal{N}\left(\beta_{t-1}, \sigma^{2} I\right)\)</span>.</li>
+<li>Draw <span class="math inline">\(\alpha_{t} \mid \alpha_{t-1} \sim \mathcal{N}\left(\alpha_{t-1}, \delta^{2} I\right)\)</span>.</li>
+<li>For each document:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Draw <span class="math inline">\(\eta \sim \mathcal{N}\left(\alpha_{t}, a^{2} I\right)\)</span>
+</li>
+<li>For each word:</li>
+</ol>
+<ol style="list-style-type: lower-roman">
+<li>Draw <span class="math inline">\(Z \sim \operatorname{Mult}(\pi(\eta))\)</span>.</li>
+<li>Draw <span class="math inline">\(W_{t, d, n} \sim \operatorname{Mult}\left(\pi\left(\beta_{t, z}\right)\right)\)</span>.</li>
+</ol>
+<p>Where <span class="math inline">\(\pi\)</span> maps the multinomial natural parameters to the mean parameters, <span class="math inline">\(\pi\left(\beta_{k, t}\right)_{w}=\frac{\exp \left(\beta_{k, t, w}\right)}{\sum_{w} \exp \left(\beta_{k, t, w}\right)}\)</span>.</p>
+<p>Graphically this is can be represented as,</p>
+<div class="inline-figure"><img src="Figures/image-20220623162926844.png" alt="image-20220623162926844" style="zoom:50%;"></div>
+</div>
+<div id="supervised-lda" class="section level4" number="6.3.4.2">
+<h4>
+<span class="header-section-number">6.3.4.2</span> Supervised LDA<a class="anchor" aria-label="anchor" href="#supervised-lda"><i class="fas fa-link"></i></a>
+</h4>
+<p>In some contexts, we both have text data and also a response variable. For example, with movie ratings, we can see people’s reviews and the rating they give the movie. We could use this paired data to help better identify topics (but also to predict responses using text data). This is the idea behind supervised LDA (sLDA) (<a href="https://proceedings.neurips.cc/paper/2007/file/d56b9fc4b0f1be8871f5e1c40c0067e7-Paper.pdf">Blei and McAuliffe, 2007</a>).</p>
+<p>The sLDA has each word is a function of the latent topic (like the standard LDA), and it also has the document-specific response variable be a function of all the latent topics in a given document. The DGP is described by the algorithm,</p>
+<ol style="list-style-type: decimal">
+<li>Draw topic proportions <span class="math inline">\(\theta \mid \alpha \sim \operatorname{Dir}(\alpha)\)</span>.</li>
+<li>For each word
+<ol style="list-style-type: lower-alpha">
+<li>Draw topic assignment <span class="math inline">\(z_{n} \mid \theta \sim \operatorname{Mult}(\theta)\)</span>.</li>
+<li>Draw word <span class="math inline">\(w_{n} \mid z_{n}, \beta_{1: K} \sim \operatorname{Mult}\left(\beta_{z_{n}}\right)\)</span>.</li>
+</ol>
+</li>
+<li>Draw response variable <span class="math inline">\(y \mid z_{1: N}, \eta, \sigma^{2} \sim \mathrm{N}\left(\eta^{\top} \bar{z}, \sigma^{2}\right)\)</span>.</li>
+</ol>
+<p>where <span class="math inline">\(\bar z\)</span> is the mean of all topics in the document.</p>
+<p>Graphically this is can be represented as,</p>
+<div class="inline-figure"><img src="Figures/image-20220623164854652.png" alt="image-20220623164854652" style="zoom:33%;"></div>
+
+</div>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="basic-word-embeddings-word2vec-glove.html"><span class="header-section-number">5</span> Basic Word Embeddings: Word2Vec &amp; Glove</a></div>
+<div class="next"><a href="sequence-models-rnns-and-lstms.html"><span class="header-section-number">7</span> Sequence Models: RNNs and LSTMs</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#topic-modelling-lda"><span class="header-section-number">6</span> Topic Modelling: LDA</a></li>
+<li><a class="nav-link" href="#notation-and-terminology"><span class="header-section-number">6.1</span> Notation and Terminology</a></li>
+<li>
+<a class="nav-link" href="#models-that-preceded-the-lda"><span class="header-section-number">6.2</span> Models that preceded the LDA:</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#latent-semantic-models-lsa"><span class="header-section-number">6.2.1</span> Latent Semantic Models (LSA)</a></li>
+<li><a class="nav-link" href="#probabilistic-latent-semantic-models-plsa"><span class="header-section-number">6.2.2</span> Probabilistic Latent Semantic Models (pLSA)</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#latent-dirichlet-allocation-lda"><span class="header-section-number">6.3</span> Latent Dirichlet Allocation (LDA)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#challenges-of-working-with-lda"><span class="header-section-number">6.3.1</span> Challenges of working with LDA</a></li>
+<li><a class="nav-link" href="#intractable-likelihood-and-estimation"><span class="header-section-number">6.3.2</span> Intractable likelihood and estimation</a></li>
+<li><a class="nav-link" href="#packages-for-implementing-the-standard-lda"><span class="header-section-number">6.3.3</span> Packages for implementing the standard LDA</a></li>
+<li><a class="nav-link" href="#extensions-to-the-standard-lda"><span class="header-section-number">6.3.4</span> Extensions to the standard LDA</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>NLP Galore</strong>" was written by Various Sources. It was last built on 2022-08-28.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

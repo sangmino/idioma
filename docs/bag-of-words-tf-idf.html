@@ -6,21 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 4 Bag of Words: TF-IDF | NLP Galore</title>
 <meta name="author" content="Various Sources">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Bag of Words: TF-IDF | NLP Galore">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 4 Bag of Words: TF-IDF | NLP Galore">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="4.1 Word Tokenization Tokenizers can easily become complex.  4.1.1 Implementing Tokenization Several Python libraries implement tokenizers, each with its own advantages and disadvantages:...">
-<meta property="og:description" content="4.1 Word Tokenization Tokenizers can easily become complex.  4.1.1 Implementing Tokenization Several Python libraries implement tokenizers, each with its own advantages and disadvantages:...">
-<meta name="twitter:description" content="4.1 Word Tokenization Tokenizers can easily become complex.  4.1.1 Implementing Tokenization Several Python libraries implement tokenizers, each with its own advantages and disadvantages:...">
+<meta name="description" content="4.1 Bag of Words A bag of words is a representation of text that describes the occurrence of words within a document. We just keep track of word counts and disregard the grammatical details and...">
+<meta property="og:description" content="4.1 Bag of Words A bag of words is a representation of text that describes the occurrence of words within a document. We just keep track of word counts and disregard the grammatical details and...">
+<meta name="twitter:description" content="4.1 Bag of Words A bag of words is a representation of text that describes the occurrence of words within a document. We just keep track of word counts and disregard the grammatical details and...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -48,15 +48,16 @@
 <li><a class="" href="regression-based-methods.html"><span class="header-section-number">3</span> Regression-Based Methods</a></li>
 <li><a class="active" href="bag-of-words-tf-idf.html"><span class="header-section-number">4</span> Bag of Words: TF-IDF</a></li>
 <li><a class="" href="basic-word-embeddings-word2vec-glove.html"><span class="header-section-number">5</span> Basic Word Embeddings: Word2Vec &amp; Glove</a></li>
-<li><a class="" href="topic-modelling-lsa-lda.html"><span class="header-section-number">6</span> Topic Modelling: LSA &amp; LDA</a></li>
+<li><a class="" href="topic-modelling-lda.html"><span class="header-section-number">6</span> Topic Modelling: LDA</a></li>
 <li><a class="" href="sequence-models-rnns-and-lstms.html"><span class="header-section-number">7</span> Sequence Models: RNNs and LSTMs</a></li>
 <li><a class="" href="attention-models-and-transformers.html"><span class="header-section-number">8</span> Attention Models and Transformers</a></li>
-<li><a class="" href="other-useful-methods-for-textual-analysis.html"><span class="header-section-number">9</span> Other Useful Methods for Textual Analysis</a></li>
+<li><a class="" href="pretrained-models-and-fine-tuning.html"><span class="header-section-number">9</span> Pretrained Models and Fine-Tuning</a></li>
+<li><a class="" href="other-useful-methods-for-textual-analysis.html"><span class="header-section-number">10</span> Other Useful Methods for Textual Analysis</a></li>
 <li class="book-part">APPLICATIONS IN ECON/FINANCE</li>
-<li><a class="" href="sentiment-analysis.html"><span class="header-section-number">10</span> Sentiment Analysis</a></li>
+<li><a class="" href="sentiment-analysis.html"><span class="header-section-number">11</span> Sentiment Analysis</a></li>
 <li class="book-part">CODE SNIPPETS</li>
-<li><a class="" href="data-scraping.html"><span class="header-section-number">11</span> Data Scraping</a></li>
-<li><a class="" href="data-cleaning.html"><span class="header-section-number">12</span> Data Cleaning</a></li>
+<li><a class="" href="data-scraping.html"><span class="header-section-number">12</span> Data Scraping</a></li>
+<li><a class="" href="data-cleaning.html"><span class="header-section-number">13</span> Data Cleaning</a></li>
 </ul>
 
         <div class="book-extra">
@@ -68,88 +69,54 @@
 <h1>
 <span class="header-section-number">4</span> Bag of Words: TF-IDF<a class="anchor" aria-label="anchor" href="#bag-of-words-tf-idf"><i class="fas fa-link"></i></a>
 </h1>
-<div id="word-tokenization" class="section level2" number="4.1">
+<div id="bag-of-words" class="section level2" number="4.1">
 <h2>
-<span class="header-section-number">4.1</span> Word Tokenization<a class="anchor" aria-label="anchor" href="#word-tokenization"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1</span> Bag of Words<a class="anchor" aria-label="anchor" href="#bag-of-words"><i class="fas fa-link"></i></a>
 </h2>
-<p>Tokenizers can easily become complex.</p>
-<div id="implementing-tokenization" class="section level3" number="4.1.1">
+<p>A bag of words is a representation of text that describes the occurrence of words within a document. We just keep track of word counts and disregard the grammatical details and the word order. It is called a “bag” of words because any information about the order or structure of words in the document is discarded. The model is only concerned with whether known words occur in the document, not where in the document.</p>
+<div id="bag-of-n-grams" class="section level3" number="4.1.1">
 <h3>
-<span class="header-section-number">4.1.1</span> Implementing Tokenization<a class="anchor" aria-label="anchor" href="#implementing-tokenization"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1.1</span> Bag of N-Grams<a class="anchor" aria-label="anchor" href="#bag-of-n-grams"><i class="fas fa-link"></i></a>
 </h3>
-<p>Several Python libraries implement tokenizers, each with its own advantages and disadvantages:</p>
-<ol style="list-style-type: decimal">
-<li><p>spaCy—Accurate , flexible, fast, Python</p></li>
-<li><p>Stanford CoreNLP—More accurate, less flexible, fast, depends on Java 8</p></li>
-<li><p>NLTK—Standard used by many NLP contests and comparisons, popular, Python</p></li>
-</ol>
-<p>NLTK and Stanford CoreNLP have been around the longest and are the most widely used for comparison of NLP algorithms in academic papers.</p>
-<div id="n-grams" class="section level4" number="4.1.1.1">
+<div id="the-idea" class="section level4" number="4.1.1.1">
 <h4>
-<span class="header-section-number">4.1.1.1</span> N-Grams<a class="anchor" aria-label="anchor" href="#n-grams"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1.1.1</span> The Idea<a class="anchor" aria-label="anchor" href="#the-idea"><i class="fas fa-link"></i></a>
 </h4>
-<p>An n-gram is a sequence containing up to n elements that have been extracted from a sequence of those elements, usually a string.</p>
-<p>When a sequence of tokens is vectorized into a bag-of-words vector, it loses a lot of the meaning inherent in the order of those words. By extending your concept of a token to include multiword tokens, n-grams, your NLP pipeline can retain much of the meaning inherent in the order of words in your statements.</p>
-</div>
-<div id="techniques-for-normalizing-the-vocabulary" class="section level4" number="4.1.1.2">
-<h4>
-<span class="header-section-number">4.1.1.2</span> Techniques for Normalizing the Vocabulary<a class="anchor" aria-label="anchor" href="#techniques-for-normalizing-the-vocabulary"><i class="fas fa-link"></i></a>
-</h4>
-<p>One can normalize the vocabulary so that tokens that mean similar things are combined into a single, normalized form. Doing so reduces the number of tokens you need to retain in your vocabulary and also improves the association of meaning across those different “spellings” of a token or n-gram in your corpus</p>
-<p><strong>Case Folding</strong></p>
-<p>Case folding is when you consolidate multiple “spellings” of a word that differ only in their capitalization. We can normalize the capitalization using list comprehension: <code>[x.lower() for x in tokens]</code></p>
-<p><strong>Stemming</strong></p>
-<p>Another common vocabulary normalization technique is to eliminate the small mean- ing differences of pluralization or possessive endings of words, or even various verb forms. Stemming removes suffixes from words in an attempt to combine words with similar meanings together under their common stem. A stem isn’t required to be a properly spelled word, but merely a token, or label, representing several possible spellings of a word.</p>
-<p>It’s important to note that stemming could greatly reduce the “precision” score for your search engine,
-because it might return many more irrelevant documents along with the relevant ones.</p>
-<p>Two of the most popular stemming algorithms are the Porter and Snowball stemmers. The Porter stemmer is named for the computer scientist Martin Porter. Porter is also responsible for enhancing the Porter stemmer to create the Snowball stemmer.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="bag-of-words-tf-idf.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem.porter</span>
-<span id="cb1-2"><a href="bag-of-words-tf-idf.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> PorterStemmer</span>
-<span id="cb1-3"><a href="bag-of-words-tf-idf.html#cb1-3" aria-hidden="true" tabindex="-1"></a>stemmer <span class="op">=</span> PorterStemmer()</span>
-<span id="cb1-4"><a href="bag-of-words-tf-idf.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">' '</span>.join([stemmer.stem(w).strip(<span class="st">"'"</span>) <span class="cf">for</span> w <span class="kw">in</span> <span class="st">"dish washer's washed dishes"</span>.split()]))</span></code></pre></div>
-<p><strong>Lemmatization</strong></p>
-<p>If you have access to information about connections between the meanings of various words, you might be able to associate several words together even if their spelling is quite different. This more extensive normalization down to the semantic root of a word—its lemma—is called lemmatization.</p>
-<p>Lemmatization is a potentially more accurate way to normalize a word than stemming or case normalization because it takes into account a word’s meaning. A lemmatizer uses a knowledge base of word synonyms and word endings to ensure that only words that mean similar things are consolidated into a single token.</p>
-<p>So lemmatizers are better than stemmers for most applications. Stemmers are only really used in large-scale information retrieval applications (keyword search).</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="bag-of-words-tf-idf.html#cb2-1" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">'wordnet'</span>)</span>
-<span id="cb2-2"><a href="bag-of-words-tf-idf.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> WordNetLemmatizer</span>
-<span id="cb2-3"><a href="bag-of-words-tf-idf.html#cb2-3" aria-hidden="true" tabindex="-1"></a>lemmatizer <span class="op">=</span> WordNetLemmatizer()</span>
-<span id="cb2-4"><a href="bag-of-words-tf-idf.html#cb2-4" aria-hidden="true" tabindex="-1"></a>lemmatizer.lemmatize(<span class="st">"better"</span>, pos<span class="op">=</span><span class="st">"a"</span>) <span class="co"># if POS is not specified, it assumes noun</span></span></code></pre></div>
-</div>
-</div>
-</div>
-<div id="bag-of-words" class="section level2" number="4.2">
-<h2>
-<span class="header-section-number">4.2</span> Bag of Words<a class="anchor" aria-label="anchor" href="#bag-of-words"><i class="fas fa-link"></i></a>
-</h2>
-<p>A bag of words is a representation of text that describes the occurrence of words within a document.</p>
-<p>We just keep track of word counts and disregard the grammatical details and the word order. It is called a “bag” of words because any information about the order or structure of words in the document is discarded. The model is only concerned with whether known words occur in the document, not where in the document.</p>
-<div id="n-gram-adaptation" class="section level3" number="4.2.1">
-<h3>
-<span class="header-section-number">4.2.1</span> N-Gram Adaptation<a class="anchor" aria-label="anchor" href="#n-gram-adaptation"><i class="fas fa-link"></i></a>
-</h3>
 <p>In general, bigrams make tokens more understandable. Suppose we have two sentences:</p>
 <ul>
 <li>Sentence 1: “This is a good job. I will not miss it for anything”</li>
 <li>Sentence 2: ”This is not good at all”</li>
 </ul>
-<p>and let us take the vocabulary of 5 words only: “good,” “job,” “miss,” “not,” and “all.”</p>
+<p>and let us take the vocabulary of 5 words only: “good”, “job”, “miss”, “not”, and “all.”</p>
 <p>In this case, the respective vectors for these sentences are:</p>
 <ul>
-<li>Sentence 1: “This is a good job. I will not miss it for anything”=<strong>[1,1,1,1,0]</strong>
+<li>Sentence 1: “This is a good job. I will not miss it for anything” = <strong>[1,1,1,1,0]</strong>
 </li>
-<li>Sentence 2: ”This is not good at all”=<strong>[1,0,0,1,1]</strong>
+<li>Sentence 2: ”This is not good at all” = <strong>[1,0,0,1,1]</strong>
 </li>
 </ul>
 <p>Sentence 2 is a negative sentence, yet this distinction is not reflected in the vectors.</p>
-<p>Now, suppose instead we use bigrams, in which case Sentence 2 can be broken into: “This is,” “is not,” “not good,” “good at,” and “at all.” In this case, the model can differentiate between sentence 1 and sentence 2.</p>
+<p>Now, suppose instead we use bigrams, in which case Sentence 2 can be broken into: “This is”, “is not”, “not good”, “good at”, and “at all.” In this case, the model can differentiate between sentence 1 and sentence 2.</p>
+</div>
+<div id="pre-processing-to-reduce-feature-space" class="section level4" number="4.1.1.2">
+<h4>
+<span class="header-section-number">4.1.1.2</span> Pre-Processing to Reduce Feature Space<a class="anchor" aria-label="anchor" href="#pre-processing-to-reduce-feature-space"><i class="fas fa-link"></i></a>
+</h4>
+<p>Using N-grams increases the feature space, so a1. few techniques are used to reduce it:</p>
+<ul>
+<li>Removing stopwords such as a, the, and, it, is, etc.</li>
+<li>Stemming: This is the process of reducing a word to its word stem. For example, words like swimmer, swimming, swim, will be mapped to one-word swim.</li>
+<li>Chunking and Parts-of-speech tagging: One can use these techniques to find meaningful words in a sentence and use them as the feature vector</li>
+</ul>
 </div>
 </div>
-<div id="tf-idf" class="section level2" number="4.3">
+</div>
+<div id="tf-idf" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">4.3</span> TF-IDF<a class="anchor" aria-label="anchor" href="#tf-idf"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> TF-IDF<a class="anchor" aria-label="anchor" href="#tf-idf"><i class="fas fa-link"></i></a>
 </h2>
-<p>TF-IDF is intended to reflect how relevant a term is in a given document. It is computed by multiplying two different metrics:</p>
+<p>TF-IDF is intended to reflect how relevant a term is in a given document. It makes rare words more prominent and effectively ignores common words. Therefore, unlike bag-of-words, it creates a normalized count where each word count is divided by the number of documents this word appears in.</p>
+<p>It is computed by multiplying two different metrics:</p>
 <ul>
 <li><p><strong>Term Frequency (TF)</strong> of a word <span class="math inline">\(t\)</span> in document <span class="math inline">\(d\)</span> is given as
 <span class="math display">\[
@@ -162,21 +129,23 @@ idf(t,D) = \log\frac{N}{|\{d\in D:t\in d\}|}
 \]</span>
 where <span class="math inline">\(N=|D|\)</span> and the denominator is the number of documents where the term <span class="math inline">\(t\)</span> appears.</p></li>
 </ul>
-<p>Then TF-IDF is calculated as:
+<p>Then TF-IDF is then calculated as:
 <span class="math display">\[
 tfidf(t,d,D) = tf(t,d)\times idf(t,D)
 \]</span>
 A high weight in TF-IDF is reached by a high term frequency (in the given document) and a low document frequency of the term in the whole collection of documents</p>
 </div>
-<div id="limitations-of-bag-of-words" class="section level2" number="4.4">
+<div id="limitations-of-bag-of-words" class="section level2" number="4.3">
 <h2>
-<span class="header-section-number">4.4</span> Limitations of Bag of Words<a class="anchor" aria-label="anchor" href="#limitations-of-bag-of-words"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3</span> Limitations of Bag of Words<a class="anchor" aria-label="anchor" href="#limitations-of-bag-of-words"><i class="fas fa-link"></i></a>
 </h2>
 <p>Although Bag-of-Words is quite efficient and easy to implement, there still are disadvantages.</p>
-<p><strong>First, the model ignores the location information of the word.</strong> The location information is a piece of very important information in the text. For example “today is off” and “Is today off,” have the exact same vector representation in the BoW model.</p>
-<p><strong>Second, the model ignores the semantics of the word.</strong> For example, words ‘soccer’ and ‘football’ are often used in the same context. However, the vectors corresponding to these words are quite different in the bag of words model.</p>
-<p><strong>Third, the range of vocabulary is a big issue faced by the Bag-of-Words model.</strong> If the model comes across a new word, it ends up ignoring the word.</p>
-
+<ol style="list-style-type: decimal">
+<li><p><strong>It suffers from the curse of dimensionality</strong> as the total dimension is generally the vocabulary size. Therefore, Its vocabulary needs to be designed carefully to manage the size. At the same time, bag of words also often leads to sparse vectors, which require more memory and computational resources.</p></li>
+<li><p><strong>The model ignores the location information of the word.</strong> The location information is a piece of very important information in the text. For example “today is off” and “Is today off”, have the exact same vector representation in the BoW model.</p></li>
+<li><p><strong>The model ignores the semantics of the word.</strong> For example, words ‘soccer’ and ‘football’ are often used in the same context. However, the vectors corresponding to these words are quite different in the bag of words model.</p></li>
+<li><p><strong>The range of vocabulary is a big issue faced by the Bag-of-Words model.</strong> If the model comes across a new word, it ends up ignoring the word.</p></li>
+</ol>
 </div>
 </div>
   <div class="chapter-nav">
@@ -187,13 +156,10 @@ A high weight in TF-IDF is reached by a high term frequency (in the given docume
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#bag-of-words-tf-idf"><span class="header-section-number">4</span> Bag of Words: TF-IDF</a></li>
 <li>
-<a class="nav-link" href="#word-tokenization"><span class="header-section-number">4.1</span> Word Tokenization</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#implementing-tokenization"><span class="header-section-number">4.1.1</span> Implementing Tokenization</a></li></ul>
+<a class="nav-link" href="#bag-of-words"><span class="header-section-number">4.1</span> Bag of Words</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#bag-of-n-grams"><span class="header-section-number">4.1.1</span> Bag of N-Grams</a></li></ul>
 </li>
-<li>
-<a class="nav-link" href="#bag-of-words"><span class="header-section-number">4.2</span> Bag of Words</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#n-gram-adaptation"><span class="header-section-number">4.2.1</span> N-Gram Adaptation</a></li></ul>
-</li>
-<li><a class="nav-link" href="#tf-idf"><span class="header-section-number">4.3</span> TF-IDF</a></li>
-<li><a class="nav-link" href="#limitations-of-bag-of-words"><span class="header-section-number">4.4</span> Limitations of Bag of Words</a></li>
+<li><a class="nav-link" href="#tf-idf"><span class="header-section-number">4.2</span> TF-IDF</a></li>
+<li><a class="nav-link" href="#limitations-of-bag-of-words"><span class="header-section-number">4.3</span> Limitations of Bag of Words</a></li>
 </ul>
 
       <div class="book-extra">
@@ -210,7 +176,7 @@ A high weight in TF-IDF is reached by a high term frequency (in the given docume
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>NLP Galore</strong>" was written by Various Sources. It was last built on 2022-06-05.</p>
+    <p>"<strong>NLP Galore</strong>" was written by Various Sources. It was last built on 2022-08-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -223,7 +189,7 @@ A high weight in TF-IDF is reached by a high term frequency (in the given docume
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,21 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 7 Sequence Models: RNNs and LSTMs | NLP Galore</title>
 <meta name="author" content="Various Sources">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
 <meta property="og:title" content="Chapter 7 Sequence Models: RNNs and LSTMs | NLP Galore">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 7 Sequence Models: RNNs and LSTMs | NLP Galore">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="A book created with bookdown.">
-<meta property="og:description" content="A book created with bookdown.">
-<meta name="twitter:description" content="A book created with bookdown.">
+<meta name="description" content="7.1 Sequence Models Unlike models that work with inputs consisting of a single feature vector \(\mathbf{x}\in \mathbb{R}^d\), sequence models work with inputs that consist of an ordered list of...">
+<meta property="og:description" content="7.1 Sequence Models Unlike models that work with inputs consisting of a single feature vector \(\mathbf{x}\in \mathbb{R}^d\), sequence models work with inputs that consist of an ordered list of...">
+<meta name="twitter:description" content="7.1 Sequence Models Unlike models that work with inputs consisting of a single feature vector \(\mathbf{x}\in \mathbb{R}^d\), sequence models work with inputs that consist of an ordered list of...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -48,15 +48,16 @@
 <li><a class="" href="regression-based-methods.html"><span class="header-section-number">3</span> Regression-Based Methods</a></li>
 <li><a class="" href="bag-of-words-tf-idf.html"><span class="header-section-number">4</span> Bag of Words: TF-IDF</a></li>
 <li><a class="" href="basic-word-embeddings-word2vec-glove.html"><span class="header-section-number">5</span> Basic Word Embeddings: Word2Vec &amp; Glove</a></li>
-<li><a class="" href="topic-modelling-lsa-lda.html"><span class="header-section-number">6</span> Topic Modelling: LSA &amp; LDA</a></li>
+<li><a class="" href="topic-modelling-lda.html"><span class="header-section-number">6</span> Topic Modelling: LDA</a></li>
 <li><a class="active" href="sequence-models-rnns-and-lstms.html"><span class="header-section-number">7</span> Sequence Models: RNNs and LSTMs</a></li>
 <li><a class="" href="attention-models-and-transformers.html"><span class="header-section-number">8</span> Attention Models and Transformers</a></li>
-<li><a class="" href="other-useful-methods-for-textual-analysis.html"><span class="header-section-number">9</span> Other Useful Methods for Textual Analysis</a></li>
+<li><a class="" href="pretrained-models-and-fine-tuning.html"><span class="header-section-number">9</span> Pretrained Models and Fine-Tuning</a></li>
+<li><a class="" href="other-useful-methods-for-textual-analysis.html"><span class="header-section-number">10</span> Other Useful Methods for Textual Analysis</a></li>
 <li class="book-part">APPLICATIONS IN ECON/FINANCE</li>
-<li><a class="" href="sentiment-analysis.html"><span class="header-section-number">10</span> Sentiment Analysis</a></li>
+<li><a class="" href="sentiment-analysis.html"><span class="header-section-number">11</span> Sentiment Analysis</a></li>
 <li class="book-part">CODE SNIPPETS</li>
-<li><a class="" href="data-scraping.html"><span class="header-section-number">11</span> Data Scraping</a></li>
-<li><a class="" href="data-cleaning.html"><span class="header-section-number">12</span> Data Cleaning</a></li>
+<li><a class="" href="data-scraping.html"><span class="header-section-number">12</span> Data Scraping</a></li>
+<li><a class="" href="data-cleaning.html"><span class="header-section-number">13</span> Data Cleaning</a></li>
 </ul>
 
         <div class="book-extra">
@@ -68,14 +69,176 @@
 <h1>
 <span class="header-section-number">7</span> Sequence Models: RNNs and LSTMs<a class="anchor" aria-label="anchor" href="#sequence-models-rnns-and-lstms"><i class="fas fa-link"></i></a>
 </h1>
+<div id="sequence-models" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Sequence Models<a class="anchor" aria-label="anchor" href="#sequence-models"><i class="fas fa-link"></i></a>
+</h2>
+<p>Unlike models that work with inputs consisting of a single feature vector <span class="math inline">\(\mathbf{x}\in \mathbb{R}^d\)</span>, sequence models work with inputs that consist of an ordered list of feature vectors <span class="math inline">\(\mathbf{x}_1, ..., \mathbf{x}_m\)</span> where each feature vector is now indexed by time or sequence step <span class="math inline">\(t\)</span>.</p>
+<p>In the context of natural language processing, we often talk about language models. Specifically, the goal of language models is to compute the probability of sequence of <span class="math inline">\(m\)</span> words, which is usually conditioned on a window of <span class="math inline">\(n\)</span> previous words, as opposed to all previous words:
+<span class="math display">\[
+P(w_1, ..., w_m) = \prod_{i=1}^{i=m} P(w_i | w_1,...,w_{i-1}) \approx \prod_{i=1}^{i=m} P(w_i | w_{i-n},...,w_{i-1})
+\]</span></p>
+<div id="n-gram-language-models" class="section level3" number="7.1.1">
+<h3>
+<span class="header-section-number">7.1.1</span> n-gram Language Models<a class="anchor" aria-label="anchor" href="#n-gram-language-models"><i class="fas fa-link"></i></a>
+</h3>
+<p>One way to compute the above probabilities is to compare the frequency of each word against the frequency of each <span class="math inline">\(n\)</span>-gram that contains the word.</p>
+<ul>
+<li><p>Bigram language model:
+<span class="math display">\[
+P(w_2|w_1) = \frac{count(w_1, w_2)}{count(w_1)}
+\]</span></p></li>
+<li><p>Trigram language model:
+<span class="math display">\[
+P(w_3|w_1, w_2) = \frac{count(w_1, w_2, w_3)}{count(w_1, w_2)}
+\]</span></p></li>
+</ul>
+<p>This approach runs into some obvious issues. First, the numerator may be zero due to sparsity. One solution is to add a small <span class="math inline">\(\delta\)</span> to the count for each word in the vocabulary. Second, the denominator may be zero due to sparsity, in which case we may “back off’” and condition on <span class="math inline">\(count(w_2)\)</span> rather than on <span class="math inline">\(count(w_1, w_2)\)</span>. Third, since this step requires storing all <span class="math inline">\(n\)</span>-grams, there may be issues with storage.</p>
+</div>
+</div>
+<div id="rnn-neural-networks-with-memory" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> RNN: Neural Networks with Memory<a class="anchor" aria-label="anchor" href="#rnn-neural-networks-with-memory"><i class="fas fa-link"></i></a>
+</h2>
+<p>Recurrent Neural Networks (RNNs) are a family of neural networks that capture the dynamics of sequences via recurrent connections. The idea is that instead of burdening our model with predicting an output in one go, we allow it the much easier task of predicting iterative sub-outputs, where each sub-output is an improvement or refinement on the previous step.</p>
+<p><strong>Hidden State = Memory</strong></p>
+<p>The core idea is that instead of modeling <span class="math inline">\(P(w_m | w_{m-1}, ..., w_{m-n+1})\)</span> it is instead preferable to use a latent variable model:
+<span class="math display">\[
+P(w_t | w_{t-1}, ..., w_1)=P(w_t | h_{t-1})
+\]</span>
+where <span class="math inline">\(h_{t-1}\)</span> is a hidden state that stores the sequence information up to time step <span class="math inline">\(t-1\)</span>. In general, the hidden state can depend on both the current input and the previous hidden state: <span class="math inline">\(h_t = f(x_t, h_{t-1})\)</span>.</p>
+<p><strong>Recurrence</strong></p>
+<p>We can also view RNNs as traditional neural networks enhanced with a loop, one that allows for information to persist across timesteps – hence the name, “recurrent.” [This also implies that the same weight matrix is applied.]</p>
+<div id="basic-rnn-architecture" class="section level3" number="7.2.1">
+<h3>
+<span class="header-section-number">7.2.1</span> Basic RNN Architecture<a class="anchor" aria-label="anchor" href="#basic-rnn-architecture"><i class="fas fa-link"></i></a>
+</h3>
+<p>An RNN can be represented by an internal hidden state <span class="math inline">\(h_t\)</span> and output <span class="math inline">\(o_t\)</span>:</p>
+<p><img src="Figures/RNN.png" alt="An unrolled recurrent neural network."><span class="math display">\[
+\begin{cases}
+h_{t} &amp; =f\left(W_{xh}x_{t}+W_{hh}h_{t-1}+b_{h}\right)\\
+o_{t} &amp; =g\left(W_{hy}h_{t}+b_{o}\right)
+\end{cases}
+\]</span></p>
+<ul>
+<li>
+<span class="math inline">\(W_{xh}x_t\)</span> : Input <span class="math inline">\(x_t\)</span> is multiplied by weight matrix <span class="math inline">\(W_{xh}\)</span> to extract information from the input</li>
+<li>
+<span class="math inline">\(W_{hh}h_{t-1}\)</span>: Previous hidden state <span class="math inline">\(h_{t-1}\)</span> is multiplied by weight matrix <span class="math inline">\(W_{hh}\)</span> to extract information from “memory”</li>
+<li>Activation functions: <span class="math inline">\(f\)</span> is usually <code>tanh</code> or <code>ReLU</code> and <code>g</code> is often <code>softmax</code>
+</li>
+<li>
+<span class="math inline">\(b_h\)</span> and <span class="math inline">\(b_o\)</span> are biases.</li>
+</ul>
+<p><strong>Advantages</strong></p>
+<p>As we continue to emphasize, recurrent neural networks can model sequence of data – either time-series or words in a sentence – so that each sample is assumed to be dependent on the previous ones. From a modelling perspective, it is also very convenience since it can process input sequences of any length, and the model size does not increase for longer input sequence lengths. This is possible because computation for step <span class="math inline">\(t\)</span> can use information from many steps back.</p>
+<p><strong>Disadvantages</strong></p>
+<p>One notable disadvantage is that training RNNs is slow since it is sequential and cannot be parallelized. In practice, it is difficult to access information from many steps back due to problems like vanishing and exploding gradients, which we discuss later in this section.</p>
+</div>
+<div id="training-rnns" class="section level3" number="7.2.2">
+<h3>
+<span class="header-section-number">7.2.2</span> Training RNNs<a class="anchor" aria-label="anchor" href="#training-rnns"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Backpropagation Through Time (BPTT)</strong></p>
+<p>Backpropagation through time (BPTT) is simply backpropagation applied to sequence models with a hidden state and thus it is used to train recurrent neural networks. We relegate the details of the implementation to <a href="https://d2l.ai/chapter_recurrent-neural-networks/bptt.html">here</a>.</p>
+</div>
+<div id="vanishing-and-exploding-gradients" class="section level3" number="7.2.3">
+<h3>
+<span class="header-section-number">7.2.3</span> Vanishing and Exploding Gradients<a class="anchor" aria-label="anchor" href="#vanishing-and-exploding-gradients"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Vanishing Gradients</strong></p>
+<p>In backpropagation, the gradients frequently become smaller and the new model weights end up being virtually identical to the old weights without any updates. As a result, the gradient descent algorithm never converges to the optimal solution. This is known as the problem of vanishing gradients.</p>
+<p>Why does this happen? Vanishing gradients issue typically occur when using sigmoid or tanh activation functions in the hidden layer, which effectively compresses a large input space into a small output space. When the inputs become fairly small or fairly large, the derivatives become extremely close to zero and there is no gradient value to propagate back.</p>
+<p>One obvious solution is to replace the activation function of the network by using ReLU instead of sigmoid. It keeps linearity for regions where sigmoid and tanh are saturated, thus responding better to gradient vanishing. Another solution is to consider a different architecture such as the LSTM, which we discuss later below. This post discusses other <a href="https://datascience.stackexchange.com/questions/72351/how-to-prevent-vanishing-gradient-or-exploding-gradient">potential changes</a>.</p>
+<p><strong>Exploding Gradients</strong></p>
+<p>If gradients get larger as the backpropagation progresses, we may end up with outsized weight updates, thereby leading to the divergence of the gradient descent algorithm.</p>
+<p>Why does this happen? This problem happens because of weights and not because of the activation function. When the weight values are large, the derivatives will also be higher, thereby changing the weights significantly and preventing the gradient from converging.</p>
+<p>A common solution is “gradient clipping” in which one may simply clip the parameter gradient element-wise before a parameter update or clip the norm of the gradient before a parameter update.</p>
+</div>
+<div id="applications" class="section level3" number="7.2.4">
+<h3>
+<span class="header-section-number">7.2.4</span> Applications<a class="anchor" aria-label="anchor" href="#applications"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Part-of-speech tagging</strong></p>
+<p>The process of classifying words into their parts of speech and labeling them accordingly is known as part-of-speech tagging, or simply POS-tagging. <a href="https://towardsdatascience.com/pos-tagging-using-rnn-7f08a522f849">This post</a> provides an implementation using RNN.</p>
+<p><strong>Text Generation</strong></p>
+<p>Text generation is one obvious application of the RNN architecture. If we are training the neural network to predict the next character, it is called Character Level Model. Similarly, we can train the model to predict the next word, given a sequence of words called Word Level Models.</p>
+</div>
+</div>
+<div id="lstm" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> LSTM<a class="anchor" aria-label="anchor" href="#lstm"><i class="fas fa-link"></i></a>
+</h2>
+<p>Long Short-Term Memory RNNs (LSTMs) is a type of RNN proposed in 1997 as a solution to the vanishing gradients problem. As foreshadowed, its major strength is in capturing long-term dependencies in the sequence. <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">This post</a> provides a very detailed explanation for understanding LSTM networks. Here we provide the most essential details.</p>
+<div id="basic-lstm-architecture" class="section level3" number="7.3.1">
+<h3>
+<span class="header-section-number">7.3.1</span> Basic LSTM Architecture<a class="anchor" aria-label="anchor" href="#basic-lstm-architecture"><i class="fas fa-link"></i></a>
+</h3>
+<p>Recall that all RNNs have the form of a chain of repeating modules of neural network. In standard RNNs, this repeating module will have a very simple structure, such as a single tanh layer. LSTMs also have this chain like structure, but the repeating module has a different structure. Instead of having a single neural network layer, there are four, interacting in a very special way.</p>
+<p>LSTM addresses the issues of the RNN by maintaining a cell state <span class="math inline">\((c_t)\)</span>, which is the state at any given time. This cell state is updated at each time step, and the output hidden state is derived from the input <span class="math inline">\((x_t)\)</span>, the previous hidden state (<span class="math inline">\(h_{t-1}\)</span>), and the updated cell state <span class="math inline">\((c_t)\)</span>.</p>
+<div class="inline-figure"><img src="Figures/lstm_architecture" alt="img" style="zoom:50%;"></div>
+<p>To read, erase, and write from the cell, there are also three corresponding gates. First is the <strong>forget gate</strong>, which is the first orange box on the left. It takes in the previous hidden state, the input and the learned weights to produce a number between 0 and 1. The second is the <strong>input gate</strong>, which consists of the next two orange boxes in the diagram. The first sigmoid layer decides which values to update, and the next tanh layer creates a vector of candidate values that can be added to the states.</p>
+<p>Whether or not the update indeed happens is determined the by the last <strong>output gate</strong>, which consists of the last two orange boxes. The first sigmoid layer decides what parts of the cell state we’re going to output, and then the cell state is put through the tanh layer and multiplied by the output of the sigmoid gate, so that we only output the parts we decided to. Note that the cell state also needs to be updated from <span class="math inline">\(c_{t-1}\)</span> to <span class="math inline">\(c_t\)</span>. This is done at the horizontal arrow at the very top of the diagram.</p>
+</div>
+<div id="variations" class="section level3" number="7.3.2">
+<h3>
+<span class="header-section-number">7.3.2</span> Variations<a class="anchor" aria-label="anchor" href="#variations"><i class="fas fa-link"></i></a>
+</h3>
+<p>One popular LSTM variant, introduced by Gers &amp; Schmidhuber (2000), is adding “peephole connections.” This means that we let the gate layers look at the cell state. Another variant is the Gated Recurrent Unit (GRU), which combines the forget and input gates into a single “update gate.” It also merges the cell state and hidden state, and makes some other changes. The resulting model is simpler than standard LSTM models, and has been growing increasingly popular. As GRU exposes the complete memory unlike the LSTM and is simpler, it is easier to modify and faster to train.</p>
+</div>
+</div>
+<div id="other-extensions" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Other Extensions<a class="anchor" aria-label="anchor" href="#other-extensions"><i class="fas fa-link"></i></a>
+</h2>
+<div id="bidirectional-rnns" class="section level3" number="7.4.1">
+<h3>
+<span class="header-section-number">7.4.1</span> Bidirectional RNNs<a class="anchor" aria-label="anchor" href="#bidirectional-rnns"><i class="fas fa-link"></i></a>
+</h3>
+<p>It is possible to make predictions based on future words by having the RNN model read through the corpus backwards. Such bi-directional RNN therefore maintains two hidden layers, one for the left-to-right propagation and another for the right-to-left propagation.</p>
+<p>Since bidirectional RNNs require access to the entire input sequence, they are not applicable to language modeling in which only the left context is available. BERT is one such system built on bidirectionality.</p>
+</div>
+<div id="multi-layer-rnns" class="section level3" number="7.4.2">
+<h3>
+<span class="header-section-number">7.4.2</span> Multi-layer RNNs<a class="anchor" aria-label="anchor" href="#multi-layer-rnns"><i class="fas fa-link"></i></a>
+</h3>
+<p>One can stack RNNs to construct a multi-layer RNNs. In such system, the hidden states from RNN layer <span class="math inline">\(i\)</span> are the inputs to RNN layer <span class="math inline">\(i+1\)</span>. This allows the network to compute more complex representations.</p>
+<p>High-performing RNNs are often multi-layer, ranging from 2 to 4 layers. This is actually not as deep as convolutional or feed-forward networks. Transformer-based networks such as BERT are usually deeper like 12 or 24 layers.</p>
 
 </div>
+</div>
+</div>
   <div class="chapter-nav">
-<div class="prev"><a href="topic-modelling-lsa-lda.html"><span class="header-section-number">6</span> Topic Modelling: LSA &amp; LDA</a></div>
+<div class="prev"><a href="topic-modelling-lda.html"><span class="header-section-number">6</span> Topic Modelling: LDA</a></div>
 <div class="next"><a href="attention-models-and-transformers.html"><span class="header-section-number">8</span> Attention Models and Transformers</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#sequence-models-rnns-and-lstms"><span class="header-section-number">7</span> Sequence Models: RNNs and LSTMs</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sequence-models-rnns-and-lstms"><span class="header-section-number">7</span> Sequence Models: RNNs and LSTMs</a></li>
+<li>
+<a class="nav-link" href="#sequence-models"><span class="header-section-number">7.1</span> Sequence Models</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#n-gram-language-models"><span class="header-section-number">7.1.1</span> n-gram Language Models</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#rnn-neural-networks-with-memory"><span class="header-section-number">7.2</span> RNN: Neural Networks with Memory</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#basic-rnn-architecture"><span class="header-section-number">7.2.1</span> Basic RNN Architecture</a></li>
+<li><a class="nav-link" href="#training-rnns"><span class="header-section-number">7.2.2</span> Training RNNs</a></li>
+<li><a class="nav-link" href="#vanishing-and-exploding-gradients"><span class="header-section-number">7.2.3</span> Vanishing and Exploding Gradients</a></li>
+<li><a class="nav-link" href="#applications"><span class="header-section-number">7.2.4</span> Applications</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#lstm"><span class="header-section-number">7.3</span> LSTM</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#basic-lstm-architecture"><span class="header-section-number">7.3.1</span> Basic LSTM Architecture</a></li>
+<li><a class="nav-link" href="#variations"><span class="header-section-number">7.3.2</span> Variations</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#other-extensions"><span class="header-section-number">7.4</span> Other Extensions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bidirectional-rnns"><span class="header-section-number">7.4.1</span> Bidirectional RNNs</a></li>
+<li><a class="nav-link" href="#multi-layer-rnns"><span class="header-section-number">7.4.2</span> Multi-layer RNNs</a></li>
+</ul>
+</li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -91,7 +254,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>NLP Galore</strong>" was written by Various Sources. It was last built on 2022-06-05.</p>
+    <p>"<strong>NLP Galore</strong>" was written by Various Sources. It was last built on 2022-08-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -104,7 +267,7 @@
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

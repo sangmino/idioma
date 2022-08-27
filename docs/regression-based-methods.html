@@ -6,21 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 3 Regression-Based Methods | NLP Galore</title>
 <meta name="author" content="Various Sources">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Regression-Based Methods | NLP Galore">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 Regression-Based Methods | NLP Galore">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="A book created with bookdown.">
-<meta property="og:description" content="A book created with bookdown.">
-<meta name="twitter:description" content="A book created with bookdown.">
+<meta name="description" content="Using document characteristics, these methods try to predict word frequencies in a given document. A natural way to model these relationships is using multinomial logistic regression; however, due...">
+<meta property="og:description" content="Using document characteristics, these methods try to predict word frequencies in a given document. A natural way to model these relationships is using multinomial logistic regression; however, due...">
+<meta name="twitter:description" content="Using document characteristics, these methods try to predict word frequencies in a given document. A natural way to model these relationships is using multinomial logistic regression; however, due...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -48,15 +48,16 @@
 <li><a class="active" href="regression-based-methods.html"><span class="header-section-number">3</span> Regression-Based Methods</a></li>
 <li><a class="" href="bag-of-words-tf-idf.html"><span class="header-section-number">4</span> Bag of Words: TF-IDF</a></li>
 <li><a class="" href="basic-word-embeddings-word2vec-glove.html"><span class="header-section-number">5</span> Basic Word Embeddings: Word2Vec &amp; Glove</a></li>
-<li><a class="" href="topic-modelling-lsa-lda.html"><span class="header-section-number">6</span> Topic Modelling: LSA &amp; LDA</a></li>
+<li><a class="" href="topic-modelling-lda.html"><span class="header-section-number">6</span> Topic Modelling: LDA</a></li>
 <li><a class="" href="sequence-models-rnns-and-lstms.html"><span class="header-section-number">7</span> Sequence Models: RNNs and LSTMs</a></li>
 <li><a class="" href="attention-models-and-transformers.html"><span class="header-section-number">8</span> Attention Models and Transformers</a></li>
-<li><a class="" href="other-useful-methods-for-textual-analysis.html"><span class="header-section-number">9</span> Other Useful Methods for Textual Analysis</a></li>
+<li><a class="" href="pretrained-models-and-fine-tuning.html"><span class="header-section-number">9</span> Pretrained Models and Fine-Tuning</a></li>
+<li><a class="" href="other-useful-methods-for-textual-analysis.html"><span class="header-section-number">10</span> Other Useful Methods for Textual Analysis</a></li>
 <li class="book-part">APPLICATIONS IN ECON/FINANCE</li>
-<li><a class="" href="sentiment-analysis.html"><span class="header-section-number">10</span> Sentiment Analysis</a></li>
+<li><a class="" href="sentiment-analysis.html"><span class="header-section-number">11</span> Sentiment Analysis</a></li>
 <li class="book-part">CODE SNIPPETS</li>
-<li><a class="" href="data-scraping.html"><span class="header-section-number">11</span> Data Scraping</a></li>
-<li><a class="" href="data-cleaning.html"><span class="header-section-number">12</span> Data Cleaning</a></li>
+<li><a class="" href="data-scraping.html"><span class="header-section-number">12</span> Data Scraping</a></li>
+<li><a class="" href="data-cleaning.html"><span class="header-section-number">13</span> Data Cleaning</a></li>
 </ul>
 
         <div class="book-extra">
@@ -68,14 +69,96 @@
 <h1>
 <span class="header-section-number">3</span> Regression-Based Methods<a class="anchor" aria-label="anchor" href="#regression-based-methods"><i class="fas fa-link"></i></a>
 </h1>
+<p>Using document characteristics, these methods try to predict word frequencies in a given document. A natural way to model these relationships is using multinomial logistic regression; however, due to the large dimensionality of vocabularies, standard multinomial logistic regressions are not computationally feasible to implement. In recent years, econometric breakthroughs have led to the development of computationally feasible approximations of the ideal multinomial logit regression (Taddy, 2015).</p>
+<p>These models have several applications. Firstly, the method tells us how the text depends on observed covariates. This is relevant in settings where the dependent variable is the text, e.g., political speeches. Secondly, once estimated, the model can be inverted to get predicted values of covariates using text as an input. This is particularly powerful for (i) nowcasting/forecasting and (ii) backcasting when data is missing (Kelly et al., 2021). For example, measurements of real activity such as GDP are only available with a lag and a quarterly frequency. However, economic media coverage is available in real-time and with low latency. Hence, it can be used to nowcast GDP. Similarly, when data have short histories, text can be used to backcast the data.</p>
+<div id="challenges-of-having-text-as-the-dependent-variable" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Challenges of having text as the dependent variable<a class="anchor" aria-label="anchor" href="#challenges-of-having-text-as-the-dependent-variable"><i class="fas fa-link"></i></a>
+</h2>
+<p>The typical unit of analysis for text data is at the frequency of an n-gram in a given document, e.g., the number of times the word “GDP” turned up in a document. These frequencies are unordered uncategorical data, i.e., it is not obvious how to combine information that a document has ten mentions of the word “GDP” with six mentions of the word “inflation.” Hence, frequency counts are represented by a document <span class="math inline">\(i\)</span> specific vectors that sit in <span class="math inline">\(\mathbf{c}_{i}\in\mathbb{R}^V\)</span> where <span class="math inline">\(V\)</span> is the number of unique n-grams in our sample. Note that <span class="math inline">\(V\)</span> is extremely large in practice which is why machine learning methods are needed.</p>
+<p>The go-to model to explain the document <span class="math inline">\(i\)</span> specific count vector <span class="math inline">\(\mathbf{c}_{i}\)</span> using variables <span class="math inline">\(\mathbf{v}_{i}\)</span> would be a multinomial logit regression,
+<span class="math display">\[
+\mathrm{p}\left(\mathbf{c}_{i} \mid \mathbf{v}_{i}, m_{i}\right) = \mathrm{MN}\left(\mathbf{c}_{i} ; \mathbf{q}_{i}, m_{i}\right) \text{ for } i=1 \ldots n
+\]</span></p>
+<p><span class="math display">\[
+q_{i j} = \frac{e^{\eta_{i j}}}{\sum_{k=1}^{d} e^{\eta_{i k}}} \text { for } j=1 \ldots d
+\]</span></p>
+<p><span class="math display">\[
+\eta_{i j} = \alpha_{j}+\mathbf{v}_{i}^{\prime} \varphi_{j}
+\]</span></p>
+<p>where <span class="math inline">\(q_{i j}\)</span> is the n-gram’s probability, <span class="math inline">\(m_i\)</span> is the total number of n-grams in the document, and <span class="math inline">\((\alpha_j,\varphi_j)\)</span> are the <span class="math inline">\(K+1\)</span> n-gram specific parameters.</p>
+<p>Given vocabularies often exceed <span class="math inline">\(10,000\)</span> n-grams, estimating the model above with even just two covariates would mean estimating <span class="math inline">\(30,000+\)</span> Parameters! The issue with standard multinomial estimation is that it cannot be parallelized; hence, estimating them for a large number of parameters is computationally prohibitive.</p>
+<p>Multinomial logit regressions cannot be parallelized because the denominator of <span class="math inline">\(q_{ij}\)</span> which depends on all the parameters in the model. Hence, to estimate the model, we need a parallelizable approximation. Taddy (2015) provided precisely such an approximation and used it to develop the distributed multinomial regression (DMR)</p>
+</div>
+<div id="distributed-multinomial-regressions-dmr" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Distributed multinomial regressions (DMR)<a class="anchor" aria-label="anchor" href="#distributed-multinomial-regressions-dmr"><i class="fas fa-link"></i></a>
+</h2>
+<p>A canonical relationship is that Multinomial distributions can be exactly decomposed into independent Poissons,
+<span class="math display">\[
+\operatorname{MN}\left(\mathbf{c}_{i} ; \mathbf{q}_{i}, m_{i}\right)=\frac{\prod_{j} P_{o}\left(c_{i j} ; e^{\eta_{i j}}\right)}{P o\left(m_{i} ; \sum_{j=1}^{d} e^{\eta_{i j}}\right)}
+\]</span>
+This decomposition does not solve the computation bottleneck since the denominator still depends on all parameters. However, Tadd (2015) used this decomposition to develop the following approximation,
+<span class="math display">\[
+\mathrm{p}\left(\mathbf{c}_{i} \mid \mathbf{v}_{i}, m_{i}\right)=\mathrm{MN}\left(\mathbf{c}_{i} ; \mathbf{q}_{i}, m_{i}\right) \approx \prod_{j} \operatorname{Po}\left(c_{i j} ; m_{i} e^{\eta_{i j}}\right)
+\]</span>
+Since this approximation doesn’t depend on <span class="math inline">\(\sum_{j=1}^{d} e^{\eta_{i j}}\)</span>It can be parallelized! Essentially, each n-gram’s parameters are estimated separately using (shifted) Poisson regressions.</p>
+<p>Taddy (2015) also developed a method for inverting the DMR so that post-estimation n-grams can be projected into covariates.</p>
+</div>
+<div id="extension-hurdle-dmr-hdmr" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Extension: Hurdle DMR (HDMR)<a class="anchor" aria-label="anchor" href="#extension-hurdle-dmr-hdmr"><i class="fas fa-link"></i></a>
+</h2>
+<p>In practice, while DMR works well for explaining strictly positive frequency counts (i.e., counts &gt; 0), it performs poorly in explaining whether a word is used at all (i.e., count 0 or 1). Kelly et al. (2021) developed the HDMR to simultaneously explain both the intensive margin (strictly positive frequency counts) and extensive margin (counts of zero and one) of word choice.</p>
+<p>At a high level, the model combines a selection model with the DMR. The selection model approximates the extensive margin, and the DMR models the intensive margin.</p>
+<p>Specifically, the selection model to include n-gram <span class="math inline">\(j\)</span> in document <span class="math inline">\(i\)</span> is standard,
+<span class="math display">\[
+h_{i j}^{*}=\gamma_{i}+\kappa_{j}+\boldsymbol{w}_{i}^{\prime} \boldsymbol{\delta}_{j}+v_{i j}
+\]</span>
+<span class="math display">\[
+h_{i j}=\mathbf{1}\left(h_{i j}^{*}&gt;0\right)
+\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol{w}_{i}\)</span> are observed variables and <span class="math inline">\((\gamma_{i},\kappa_{j},\boldsymbol{\delta}_{j})\)</span> Are parameters. And the count model has the following form,
+<span class="math display">\[
+c_{i j}^{*} =\lambda\left(\mu_{i}+\alpha_{j}+\mathbf{v}_{i}^{\prime} \boldsymbol{\varphi}_{j}\right)+\varepsilon_{i j}
+\]</span>
+<span class="math display">\[
+c_{i j} = \left(1+c_{i j}^{*}\right) h_{i j}
+\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol{v}_{i}\)</span> are observed variables and <span class="math inline">\((\mu_i,\alpha_j,\boldsymbol{\varphi}_{j})\)</span> Are parameters. <span class="math inline">\(\lambda(\cdot)\geq 0\)</span>, hence the second equation restricts to positive counts. Like DMR, this method is also parallelizable and has an inversion method for projecting text to covariates.</p>
+</div>
+<div id="application-1-using-text-to-measure-traditionally-difficult-to-quantify-concepts" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Application 1: using text to measure traditionally difficult to quantify concepts<a class="anchor" aria-label="anchor" href="#application-1-using-text-to-measure-traditionally-difficult-to-quantify-concepts"><i class="fas fa-link"></i></a>
+</h2>
+<p>Gentzkow et al. (2019) used DMR to measure partisanship in US politicals—a traditionally allusive concept to quantify. They defined partisanshp as the posterior probability, that an observer with a neutral prior on a poltician, expects to identify a speaker’s party after hearing teh speaker utter a single word. Given this definition, they use DMR to estimate the n-gram probabilities for Democrats adn Republicans. They then map this empirical distribution to the posterior belief that an observer with a neutral prior assigns to a speaker beign Republican if she utters prase <span class="math inline">\(j\)</span> in session <span class="math inline">\(t\)</span> and has characteristics <span class="math inline">\(x\)</span>. This definition of partisanship only considers the extensive margin of word choice e.g. whether the poltican chooses to use the n-gram “pro-life” in there speaches or not.</p>
+<p>Kelly et al. (2021) expand the definition of partisanship above to include both the extensive and intensive margin of word choice i.e. partisanshp as the posterior probability, that an observer with a neutral prior on a poltician, expects to identify a speaker’s party after hearing the speaker utter <del>a single word</del> the words in their speach. This definition not only considers whether the word “pro-choice” was used, but also how often was it used. Since, Kelly et al. (2021) definition of partisanship considers both the extensive and intensive margin of word choice they use HDMR.</p>
+<p>The figure below shows the resulting partisanship measures for the two measures. The left hand side figure shows the results from the using the DMR with the extensive margin definition of partisanship. The DMR estimate suggests particanship has significantly increased in the last 20 years. The right hand side figure whows that when the intenshive margin is also considered, we see spikes in partisanship in the 20’s in addition to the current period too.</p>
+<div class="inline-figure"><img src="Figures/DMR_HDMR.png" style="zoom:25%;"></div>
+</div>
+<div id="application-2-using-text-data-to-forecast-nowcast-and-backcast-hard-data" class="section level2" number="3.5">
+<h2>
+<span class="header-section-number">3.5</span> Application 2: Using text data to forecast, nowcast and backcast hard data<a class="anchor" aria-label="anchor" href="#application-2-using-text-data-to-forecast-nowcast-and-backcast-hard-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>Once a linear regression model <span class="math inline">\(y_i = \sum_{k} x_{i,k}\beta_k\)</span> is estimated, we can can use <span class="math inline">\(y_i\)</span>, <span class="math inline">\(\hat \beta\)</span> and <span class="math inline">\(x_{i,2},\dots, x_{i,K}\)</span> to get a fitted value for <span class="math inline">\(x_{i,1}\)</span>. Similarly with DMR and HDMR, once the model is estimated, you can use text data to get fitted values for covariates in an <em>inverse regression</em>. Hence, text data can be used to forecast, nowcast and backcast hard data.</p>
+<p>For example, text data can help with better nowcasting and forecasting of macro variables. See Kelly et al. (2021) for this application. Text data is typically available at a higher frequency and with less latency than most macro data, and hence, can potentially improve macro variable nowcasts and forecasts.</p>
+<p>Similarly, often many data series have short-time series, whereas newspaper articles on the topic are available much further back. In this case news articles can be used to backcast data with short time series. For example, Kelly et al. (2021) demonstrate how text data (along with other financial data) can be used to extend back the intermediary capital ratio (ICR) back to the 1930s—ICR is only available for the post 70s period.</p>
 
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="dictionary-based-methods.html"><span class="header-section-number">2</span> Dictionary-Based Methods</a></div>
 <div class="next"><a href="bag-of-words-tf-idf.html"><span class="header-section-number">4</span> Bag of Words: TF-IDF</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#regression-based-methods"><span class="header-section-number">3</span> Regression-Based Methods</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#regression-based-methods"><span class="header-section-number">3</span> Regression-Based Methods</a></li>
+<li><a class="nav-link" href="#challenges-of-having-text-as-the-dependent-variable"><span class="header-section-number">3.1</span> Challenges of having text as the dependent variable</a></li>
+<li><a class="nav-link" href="#distributed-multinomial-regressions-dmr"><span class="header-section-number">3.2</span> Distributed multinomial regressions (DMR)</a></li>
+<li><a class="nav-link" href="#extension-hurdle-dmr-hdmr"><span class="header-section-number">3.3</span> Extension: Hurdle DMR (HDMR)</a></li>
+<li><a class="nav-link" href="#application-1-using-text-to-measure-traditionally-difficult-to-quantify-concepts"><span class="header-section-number">3.4</span> Application 1: using text to measure traditionally difficult to quantify concepts</a></li>
+<li><a class="nav-link" href="#application-2-using-text-data-to-forecast-nowcast-and-backcast-hard-data"><span class="header-section-number">3.5</span> Application 2: Using text data to forecast, nowcast and backcast hard data</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -91,7 +174,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>NLP Galore</strong>" was written by Various Sources. It was last built on 2022-06-05.</p>
+    <p>"<strong>NLP Galore</strong>" was written by Various Sources. It was last built on 2022-08-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -104,7 +187,7 @@
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,21 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 5 Basic Word Embeddings: Word2Vec &amp; Glove | NLP Galore</title>
 <meta name="author" content="Various Sources">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
 <meta property="og:title" content="Chapter 5 Basic Word Embeddings: Word2Vec &amp; Glove | NLP Galore">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 5 Basic Word Embeddings: Word2Vec &amp; Glove | NLP Galore">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="A book created with bookdown.">
-<meta property="og:description" content="A book created with bookdown.">
-<meta name="twitter:description" content="A book created with bookdown.">
+<meta name="description" content="5.1 Overview Word embedding simply refers to representing words as word vectors. The idea is that we have a large corpus of text and every word in a fixed vocabulary is represented by a vector....">
+<meta property="og:description" content="5.1 Overview Word embedding simply refers to representing words as word vectors. The idea is that we have a large corpus of text and every word in a fixed vocabulary is represented by a vector....">
+<meta name="twitter:description" content="5.1 Overview Word embedding simply refers to representing words as word vectors. The idea is that we have a large corpus of text and every word in a fixed vocabulary is represented by a vector....">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -48,15 +48,16 @@
 <li><a class="" href="regression-based-methods.html"><span class="header-section-number">3</span> Regression-Based Methods</a></li>
 <li><a class="" href="bag-of-words-tf-idf.html"><span class="header-section-number">4</span> Bag of Words: TF-IDF</a></li>
 <li><a class="active" href="basic-word-embeddings-word2vec-glove.html"><span class="header-section-number">5</span> Basic Word Embeddings: Word2Vec &amp; Glove</a></li>
-<li><a class="" href="topic-modelling-lsa-lda.html"><span class="header-section-number">6</span> Topic Modelling: LSA &amp; LDA</a></li>
+<li><a class="" href="topic-modelling-lda.html"><span class="header-section-number">6</span> Topic Modelling: LDA</a></li>
 <li><a class="" href="sequence-models-rnns-and-lstms.html"><span class="header-section-number">7</span> Sequence Models: RNNs and LSTMs</a></li>
 <li><a class="" href="attention-models-and-transformers.html"><span class="header-section-number">8</span> Attention Models and Transformers</a></li>
-<li><a class="" href="other-useful-methods-for-textual-analysis.html"><span class="header-section-number">9</span> Other Useful Methods for Textual Analysis</a></li>
+<li><a class="" href="pretrained-models-and-fine-tuning.html"><span class="header-section-number">9</span> Pretrained Models and Fine-Tuning</a></li>
+<li><a class="" href="other-useful-methods-for-textual-analysis.html"><span class="header-section-number">10</span> Other Useful Methods for Textual Analysis</a></li>
 <li class="book-part">APPLICATIONS IN ECON/FINANCE</li>
-<li><a class="" href="sentiment-analysis.html"><span class="header-section-number">10</span> Sentiment Analysis</a></li>
+<li><a class="" href="sentiment-analysis.html"><span class="header-section-number">11</span> Sentiment Analysis</a></li>
 <li class="book-part">CODE SNIPPETS</li>
-<li><a class="" href="data-scraping.html"><span class="header-section-number">11</span> Data Scraping</a></li>
-<li><a class="" href="data-cleaning.html"><span class="header-section-number">12</span> Data Cleaning</a></li>
+<li><a class="" href="data-scraping.html"><span class="header-section-number">12</span> Data Scraping</a></li>
+<li><a class="" href="data-cleaning.html"><span class="header-section-number">13</span> Data Cleaning</a></li>
 </ul>
 
         <div class="book-extra">
@@ -68,14 +69,176 @@
 <h1>
 <span class="header-section-number">5</span> Basic Word Embeddings: Word2Vec &amp; Glove<a class="anchor" aria-label="anchor" href="#basic-word-embeddings-word2vec-glove"><i class="fas fa-link"></i></a>
 </h1>
+<div id="overview" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
+</h2>
+<p>Word embedding simply refers to representing words as word vectors. The idea is that we have a large corpus of text and every word in a fixed vocabulary is represented by a vector.</p>
+<p><strong>Need for Word Embedding</strong></p>
+<p>Various word encoding methods like Integer/ Label Encoding or One-Hot Encoding have many limitations. The main limitation is that these encoding doesn’t have the semantic relationship between the words. Therefore, an alternative approach is to learn to encode similarity in the vectors themselves.</p>
+<p>In addition, for one-hot encoding, memory requirement and the features space is increasing in the vocabulary size.</p>
+<p><strong>Generating Word Embeddings</strong></p>
+<p>There are generally two methods for generating word embeddings: (1) SVD based methods and (2) neural network (iteration) based methods.</p>
+<ul>
+<li>
+<p>In SVD based embedding methods, first, we create the matrix of co-occurrence and then reduce the dimensionality of the matrix using SVD. After applying SVD, each word in the vocabulary has an embedding in reduced space.</p>
+<p>While these methods effectively leverage global statistical information, they are primarily used to capture word similarities and do poorly on tasks such as word analogy, indicating a sub-optimal vector space structure.</p>
+</li>
+<li>
+<p>In neural net based methods, instead of computing and storing global information about some huge dataset, one can try to create a model that will be able to learn one iteration at a time.</p>
+<p>These methods are shallow window-based, which learn word embeddings by making predictions in local context windows.</p>
+</li>
+</ul>
+</div>
+<div id="svd-based-methods" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> SVD Based Methods<a class="anchor" aria-label="anchor" href="#svd-based-methods"><i class="fas fa-link"></i></a>
+</h2>
+<p>One basic idea is to accumulate word co-occurrence counts in matrix <span class="math inline">\(X\)</span> and then perform Singular Value Decomposition (SVD) on <span class="math inline">\(X\)</span> to get <span class="math inline">\(USV^\top\)</span> decomposition. Then the first <span class="math inline">\(k\)</span> columns of <span class="math inline">\(U\)</span> can be used as <span class="math inline">\(k\)</span>-dimensional word vectors.</p>
+<div id="limitations" class="section level3" number="5.2.1">
+<h3>
+<span class="header-section-number">5.2.1</span> Limitations<a class="anchor" aria-label="anchor" href="#limitations"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are numerous limitations of SVD based methods:</p>
+<ul>
+<li>Generally, the matrix is of very high dimension, which results in high training cost <span class="math inline">\(O(mn^2)\)</span> where <span class="math inline">\(m\)</span> is the size of a dictionary and <span class="math inline">\(n\)</span> is the embedding size. So for a corpus with a large number of words, it becomes very difficult to train.</li>
+<li>The matrix quickly becomes imbalanced due to high frequency words.</li>
+<li>The dimension of the matrix changes as soon as a new word is introduced.</li>
+</ul>
+<p>To get around this problem, one can use the following tricks:</p>
+<ul>
+<li>Ignore the common words like “is”, “the” etc.</li>
+<li>The weight of the two different words should be considered based on the distance between the two words, rather than just raw count.</li>
+</ul>
+</div>
+</div>
+<div id="iteration-based-methods" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Iteration Based Methods<a class="anchor" aria-label="anchor" href="#iteration-based-methods"><i class="fas fa-link"></i></a>
+</h2>
+<p>The idea is to design a model whose parameters are the word vectors.</p>
+<div id="word2vec" class="section level3" number="5.3.1">
+<h3>
+<span class="header-section-number">5.3.1</span> Word2Vec<a class="anchor" aria-label="anchor" href="#word2vec"><i class="fas fa-link"></i></a>
+</h3>
+<p>Word2Vec is one of the most popular technique to learn word embeddings using shallow neural network, developed by Tomas Mikolov in 2013 at Google. It is a shallow, two-layer neural network that is trained to reconstruct linguistic contexts of words.</p>
+<ul>
+<li>It takes a large corpus of words as input and outputs a vector space with hundreds of dimensions, with each unique word in the corpus allocated to a corresponding vector in the space.</li>
+</ul>
+<p>It can be obtained using two model architectures: Continuous Bag of Words (CBOW) and Skip-gram. CBOW aims to predict a center word from the surrounding context in terms of word vectors. Skip-gram does the opposite, and predicts the distribution (probability) of context words from a center word.</p>
+<div id="method-1-cbow" class="section level4" number="5.3.1.1">
+<h4>
+<span class="header-section-number">5.3.1.1</span> Method #1: CBOW<a class="anchor" aria-label="anchor" href="#method-1-cbow"><i class="fas fa-link"></i></a>
+</h4>
+<p>The core idea is to predict a center word from the surrounding context. For each word <span class="math inline">\(w_i\)</span>, we learn 2 vectors: <span class="math inline">\(v_i\)</span>, the representation when the word is in the context, and <span class="math inline">\(u_i\)</span>, the representation when the word is in the center.</p>
+<p><strong>Using the Model </strong></p>
+<p>The goal is to learn two matrices, <span class="math inline">\(\mathcal{V}\in\mathbb{R}^{n\times|V|}\)</span> and <span class="math inline">\(\mathcal{U}\in\mathbb{R}^{|V|\times n}\)</span>. <span class="math inline">\(\mathcal{V}\)</span> is the input word matrix where the <span class="math inline">\(i\)</span>th column is <span class="math inline">\(v_i\)</span>, and <span class="math inline">\(\mathcal{U}\)</span> is the output word matrix where the <span class="math inline">\(j\)</span>th row is <span class="math inline">\(u_j\)</span>. Equipped with this matrix, the model then predicts the center word through the following steps:</p>
+<ol style="list-style-type: decimal">
+<li>For the input context of size <span class="math inline">\(m\)</span>, one hot word vectors are generated: <span class="math inline">\(x^{(c-m)}, ..., x^{(c-1)},x^{(c+1)},...,x^{(c+m)}\in\mathbb{R}^{|V|}\)</span>
+</li>
+<li>We obtain the embeddings for each vector via <span class="math inline">\(v = \mathcal{V}x\)</span>.</li>
+<li>We average the vectors to get <span class="math inline">\(\hat{v}\)</span> and generate a score vector <span class="math inline">\(z=\mathcal{U}\hat{v}\in\mathbb{R}^{|V|}\)</span>.</li>
+<li>Turn the scores into probabilities via <span class="math inline">\(\hat{y} = softmax(z) \in\mathbb{R}^{|V|}\)</span>, which we’d like to be close to the true probability <span class="math inline">\(y\)</span> – which happens to be one hot vector of the actual word – as much as possible.</li>
+</ol>
+<p><strong>Training the Model</strong></p>
+<p>In training the model, we often use the cross entropy <span class="math inline">\(H(\hat{y}, y)\)</span> as the measure of distance:
+<span class="math display">\[
+H(\hat{y}, y) = - \sum_{j=1}^{|V|} y_j \log (\hat{y}_j)
+\]</span>
+Therefore, the optimization problem can be framed as minimizing the objective <span class="math inline">\(J\)</span> where
+<span class="math display">\[
+J = -\log P(w_c|w_{c-m}, ..., w_{c-1}, w_{c+1}, ..., w_{c+m})
+\]</span>
+Using the notations for the embeddings,
+<span class="math display">\[
+=-\log P(u_c|\hat{v}) = -\log \frac{\exp(u_c^\top \hat{v})}{\sum_{j=1}^{|V|} \exp(u_j^\top \hat{v})}
+\]</span>
+Therefore we can use stochastic gradient descent to update all relevant word vectors <span class="math inline">\(u_c\)</span> and <span class="math inline">\(v_j\)</span>.</p>
+</div>
+<div id="method-2-skip-gram" class="section level4" number="5.3.1.2">
+<h4>
+<span class="header-section-number">5.3.1.2</span> Method #2: Skip-Gram<a class="anchor" aria-label="anchor" href="#method-2-skip-gram"><i class="fas fa-link"></i></a>
+</h4>
+<p>The core idea is to predict surrounding context words given a center word. The setup is largely the same as CBOW with the role of center and context words reversed.</p>
+<p><strong>Using the Model </strong></p>
+<ol style="list-style-type: decimal">
+<li>Generate one hot input vector <span class="math inline">\(x\in\mathbb{R}^{|V|}\)</span> of the center word.</li>
+<li>Use the embeddings to get the embedded word vector for the center word: <span class="math inline">\(v_c = \mathcal{V}x\in \mathbb{R}^n\)</span>.</li>
+<li>Generate a score vector <span class="math inline">\(z=\mathcal{U}v_c\)</span>.</li>
+<li>Turn the score vector into probabilities <span class="math inline">\(\hat{y} = softmax(z)\)</span> which yields the probabilities of observing each context word: <span class="math inline">\(\hat{y}_{c-m}, ..., \hat{y}_{c-1}, \hat{y}_{c+1}, ..., \hat{y}_{c+m}\)</span>. As before, we want these probability vectors to match the one hot vectors of the actual output.</li>
+</ol>
+<p><strong>Training the Model</strong></p>
+<p>Given this task is a bit more daunting, we need one additional assumption of strong conditional independence. In other words, given the center word, all output words are completely independent.</p>
+<p>Therefore, the objective can be written as:
+<span class="math display">\[
+J = -\log P(w_{c-m}, ..., w_{c+m}|w_c) = -\log \prod_{j=0, j\neq m}^{2m} P(w_{c-m+j} | w_c)
+\]</span>
+Once again, applying the embeddings yields:
+<span class="math display">\[
+=-\log \prod_{j=0, j\neq m}^{2m} P(u_{c-m+j} | v_c) = -\log \prod_{j=0,j\neq m}^{2m} \frac{\exp(u_{c-m+j}^\top v_c)}{\sum_{k=1}^{|V|}\exp(u_{k}^\top v_c)}
+\]</span>
+In essence, Skip-gram treats each context word equally: the model computes the probability for each word of appearing in the context independently of the distance to the center word.</p>
+</div>
+<div id="implementation-details" class="section level4" number="5.3.1.3">
+<h4>
+<span class="header-section-number">5.3.1.3</span> Implementation Details<a class="anchor" aria-label="anchor" href="#implementation-details"><i class="fas fa-link"></i></a>
+</h4>
+<p>According to the original paper, it is found that Skip-Gram works well with small datasets, and can better represent less frequent words. However, CBOW is found to train faster than Skip-Gram, and can better represent more frequent words.</p>
+<p>The original authors of the method also provide two implementation details that improve the training performance: (i) negative sampling and (ii) hierarchical softmax.</p>
+<p><strong>Negative Sampling</strong></p>
+<p>By defining a new objective function, negative sampling aims at maximizing the similarity of the words in the same context and minimizing it when they occur in different contexts. However, instead of doing the minimization for all the words in the dictionary except for the context words, it randomly selects a handful of words depending on the training size and uses them to optimize the objective.</p>
+<p><strong>Heirarchical Softmax</strong></p>
+<p>Heirarchical softmax is a replacement for softmax which is much faster to evaluate: softmax is <span class="math inline">\(O(n)\)</span> time, while hierarchical softmax is <span class="math inline">\(O(\log n)\)</span> time.</p>
+<p>You can view the softmax function as a tree, where the root node is the hidden layer activations (or context vector C ), and the leaves are the probabilities of each word. A hierarchical softmax instead computes the values of the leaves with a multi-layer tree. To evaluate the probability of a given word, take the product of the probabilities of each edge on the path to that node.</p>
+</div>
+</div>
+</div>
+<div id="best-of-both-worlds-glove" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Best of Both Worlds: GloVe<a class="anchor" aria-label="anchor" href="#best-of-both-worlds-glove"><i class="fas fa-link"></i></a>
+</h2>
+<p>The starting point for GloVe is to reconcile linear algebra algorithms with neural updating algorithms. The main advantage of GloVe is that unlike Word2vec, GloVe does not just rely on local statistics but also incorporates global statistics (word co-occurrence) to obtain word vectors.</p>
+<p>The main insight is that the ratio of the co-occurrence probabilities of two words (rather than their co-occurrence probabilities themselves) is what contains information and so we look to encode this information as vector differences.</p>
+<p><strong>The Model</strong></p>
+<p>Let <span class="math inline">\(X\)</span> denote the co-occurrence matrix where <span class="math inline">\(X_{ij}\)</span> is the number of times word <span class="math inline">\(j\)</span> occurs in the context of word <span class="math inline">\(i\)</span>. And denote <span class="math inline">\(P_{ij} = P(w_j | w_i) = X_{ij} / X_i\)</span> as the probability of <span class="math inline">\(j\)</span> appearing in the context of word <span class="math inline">\(i\)</span> where <span class="math inline">\(X_i = \sum_{k} X_{ik}\)</span>.</p>
+<ul>
+<li>As one can see, populating <span class="math inline">\(X\)</span> and computing <span class="math inline">\(P\)</span> requires a single pass through the entire corpus, which is a one-time up-front cost.</li>
+</ul>
+<p>The objective <span class="math inline">\(J\)</span> is the global cross-entropy loss:
+<span class="math display">\[
+J = - \sum_{i\in corpus} \sum_{j\in context(i)} \log Q_{ij}
+\]</span>
+where <span class="math inline">\(Q_{ij}\)</span> is the probability of word <span class="math inline">\(j\)</span> appearing in the context of word <span class="math inline">\(i\)</span> as in the skip-gram model. We can then rewrite the objective as
+<span class="math display">\[
+J= - \sum_{i=1}^W \sum_{j=1}^W X_{ij} \log Q_{ij}
+\]</span>
+Since <span class="math inline">\(Q_{ij}\)</span> requires normalization and thus incurs a summation over the entire vocabulary, a least squares objective is used instead:
+<span class="math display">\[
+\hat{J} = \sum_{i=1}^W \sum_{j=1}^W X_i (\hat{P}_{ij} - \hat{Q}_{ij})^2
+\]</span>
+where <span class="math inline">\(\hat{P}_{ij} = X_{ij}\)</span> and <span class="math inline">\(\hat{Q}_{ij} = \exp(u_j^\top v_i)\)</span> are the unnormalized distribution. But since <span class="math inline">\(X_{ij}\)</span> can be large, we will instead minimize the squared error in the log space and introduce a more general weighting scheme:
+<span class="math display">\[
+\hat{J} = \sum_{i=1}^W \sum_{j=1}^W f(X_{ij}) (u_j^\top v_i - \log X_{ij})^2
+\]</span></p>
 
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="bag-of-words-tf-idf.html"><span class="header-section-number">4</span> Bag of Words: TF-IDF</a></div>
-<div class="next"><a href="topic-modelling-lsa-lda.html"><span class="header-section-number">6</span> Topic Modelling: LSA &amp; LDA</a></div>
+<div class="next"><a href="topic-modelling-lda.html"><span class="header-section-number">6</span> Topic Modelling: LDA</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#basic-word-embeddings-word2vec-glove"><span class="header-section-number">5</span> Basic Word Embeddings: Word2Vec &amp; Glove</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#basic-word-embeddings-word2vec-glove"><span class="header-section-number">5</span> Basic Word Embeddings: Word2Vec &amp; Glove</a></li>
+<li><a class="nav-link" href="#overview"><span class="header-section-number">5.1</span> Overview</a></li>
+<li>
+<a class="nav-link" href="#svd-based-methods"><span class="header-section-number">5.2</span> SVD Based Methods</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#limitations"><span class="header-section-number">5.2.1</span> Limitations</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#iteration-based-methods"><span class="header-section-number">5.3</span> Iteration Based Methods</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#word2vec"><span class="header-section-number">5.3.1</span> Word2Vec</a></li></ul>
+</li>
+<li><a class="nav-link" href="#best-of-both-worlds-glove"><span class="header-section-number">5.4</span> Best of Both Worlds: GloVe</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -91,7 +254,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>NLP Galore</strong>" was written by Various Sources. It was last built on 2022-06-05.</p>
+    <p>"<strong>NLP Galore</strong>" was written by Various Sources. It was last built on 2022-08-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -104,7 +267,7 @@
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

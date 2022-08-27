@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 12 Data Scraping | NLP Galore</title>
+<title>Chapter 9 Pretrained Models and Fine-Tuning | NLP Galore</title>
 <meta name="author" content="Various Sources">
 <meta name="generator" content="bookdown 0.28 with bs4_book()">
-<meta property="og:title" content="Chapter 12 Data Scraping | NLP Galore">
+<meta property="og:title" content="Chapter 9 Pretrained Models and Fine-Tuning | NLP Galore">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 12 Data Scraping | NLP Galore">
+<meta name="twitter:title" content="Chapter 9 Pretrained Models and Fine-Tuning | NLP Galore">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -18,9 +18,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="A book created with bookdown.">
-<meta property="og:description" content="A book created with bookdown.">
-<meta name="twitter:description" content="A book created with bookdown.">
+<meta name="description" content="In this section, we provide an ver  9.1 BERT   9.2 GPT">
+<meta property="og:description" content="In this section, we provide an ver  9.1 BERT   9.2 GPT">
+<meta name="twitter:description" content="In this section, we provide an ver  9.1 BERT   9.2 GPT">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -51,12 +51,12 @@
 <li><a class="" href="topic-modelling-lda.html"><span class="header-section-number">6</span> Topic Modelling: LDA</a></li>
 <li><a class="" href="sequence-models-rnns-and-lstms.html"><span class="header-section-number">7</span> Sequence Models: RNNs and LSTMs</a></li>
 <li><a class="" href="attention-models-and-transformers.html"><span class="header-section-number">8</span> Attention Models and Transformers</a></li>
-<li><a class="" href="pretrained-models-and-fine-tuning.html"><span class="header-section-number">9</span> Pretrained Models and Fine-Tuning</a></li>
+<li><a class="active" href="pretrained-models-and-fine-tuning.html"><span class="header-section-number">9</span> Pretrained Models and Fine-Tuning</a></li>
 <li><a class="" href="other-useful-methods-for-textual-analysis.html"><span class="header-section-number">10</span> Other Useful Methods for Textual Analysis</a></li>
 <li class="book-part">APPLICATIONS IN ECON/FINANCE</li>
 <li><a class="" href="sentiment-analysis.html"><span class="header-section-number">11</span> Sentiment Analysis</a></li>
 <li class="book-part">CODE SNIPPETS</li>
-<li><a class="active" href="data-scraping.html"><span class="header-section-number">12</span> Data Scraping</a></li>
+<li><a class="" href="data-scraping.html"><span class="header-section-number">12</span> Data Scraping</a></li>
 <li><a class="" href="data-cleaning.html"><span class="header-section-number">13</span> Data Cleaning</a></li>
 </ul>
 
@@ -65,18 +65,33 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-scraping" class="section level1" number="12">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pretrained-models-and-fine-tuning" class="section level1" number="9">
 <h1>
-<span class="header-section-number">12</span> Data Scraping<a class="anchor" aria-label="anchor" href="#data-scraping"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9</span> Pretrained Models and Fine-Tuning<a class="anchor" aria-label="anchor" href="#pretrained-models-and-fine-tuning"><i class="fas fa-link"></i></a>
 </h1>
+<p>In this section, we provide an ver</p>
+<div id="bert" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> BERT<a class="anchor" aria-label="anchor" href="#bert"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="gpt" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> GPT<a class="anchor" aria-label="anchor" href="#gpt"><i class="fas fa-link"></i></a>
+</h2>
 
 </div>
+</div>
   <div class="chapter-nav">
-<div class="prev"><a href="sentiment-analysis.html"><span class="header-section-number">11</span> Sentiment Analysis</a></div>
-<div class="next"><a href="data-cleaning.html"><span class="header-section-number">13</span> Data Cleaning</a></div>
+<div class="prev"><a href="attention-models-and-transformers.html"><span class="header-section-number">8</span> Attention Models and Transformers</a></div>
+<div class="next"><a href="other-useful-methods-for-textual-analysis.html"><span class="header-section-number">10</span> Other Useful Methods for Textual Analysis</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#data-scraping"><span class="header-section-number">12</span> Data Scraping</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#pretrained-models-and-fine-tuning"><span class="header-section-number">9</span> Pretrained Models and Fine-Tuning</a></li>
+<li><a class="nav-link" href="#bert"><span class="header-section-number">9.1</span> BERT</a></li>
+<li><a class="nav-link" href="#gpt"><span class="header-section-number">9.2</span> GPT</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
