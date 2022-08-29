@@ -120,7 +120,7 @@
 
 \title{NLP Galore}
 \author{Various Sources}
-\date{2022-08-28}
+\date{2022-08-29}
 
 \begin{document}
 \maketitle
@@ -142,6 +142,44 @@ Please \textbf{do not} cite.
 
 \hypertarget{dictionary-based-methods}{%
 \chapter{Dictionary-Based Methods}\label{dictionary-based-methods}}
+
+We first describe dictionary-based methods, which are by far the most common and least resource-intensive way of conducting textual analysis.
+
+\hypertarget{a-stylized-guide}{%
+\section{A Stylized Guide}\label{a-stylized-guide}}
+
+Many papers employing dictionary-based methods follow this cookbook:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What do you want to measure, and why is it important?
+\item
+  How will you measure what you want to measure? Which corpus will you use? Which dictionary will you use?
+\item
+  Which economic variables are you interested in explaining with the measurement?
+\end{enumerate}
+
+Many well-known papers follow this format:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://academic.oup.com/rfs/article-abstract/34/9/4045/5917640}{Cieslak and Vissing-Jorgensen (2021)} study the Fed's attention to the stock market, which is important given its prominent role in the conduct of monetary policy. To measure this object, they use the FOMC documents as corpus and utilize a self-created dictionary of stock market keywords. They then relate the measured attention to the Fed's interest rate decisions and updates to its growth expectations.
+\item
+  \href{https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3642508}{Sautner, Lent, Vilkov, and Zhang (2022)} is interested in measuring firm-level exposure to climate change. Given rising climate risk and the accompanying regulator attention, measuring the exposures is of key importance. To measure this object, they use the earnings conference calls as corpus and utilize a dictionary created using a keyword-discovery algorithm. They relate the measured exposures to green technology hiring and patenting as well as prices of options and equity claims.
+\item
+  \href{https://www.nber.org/papers/w29526}{Hassan et al.~(2022)} seeks to measure country risk as perceived by investors and firms, which is a critical determinant of capital movements across countries. They use earnings conference calls as corpus and use synonyms of risk and uncertainty obtained from Oxford dictionary, library of tone words from Loughran and McDonald (2011), and a self-created dictionary of country-specific keywords. Ultimately, they relate the measured country risk to capital flows and sudden stops, firm-level investment and employment decisions, and fluctuations in exchange rates.
+\end{itemize}
+
+\hypertarget{often-used-dictionaries}{%
+\section{Often-Used Dictionaries}\label{often-used-dictionaries}}
+
+\hypertarget{loughran-mcdonald-lm-dictionary}{%
+\subsection{Loughran-McDonald (LM) Dictionary}\label{loughran-mcdonald-lm-dictionary}}
+
+Loughran and McDonald (2011) created six different word lists (negative, positive, uncertainty, litigious, strong modal, and weak modal) by examining word usage in a large sample of 10-Ks during the period 1994--2008. Their dictionary has become predominant in many studies, and papers have used the LM word lists (primarily negative words) to gauge the tone of the business communication. Data can be obtained at this \href{https://sraf.nd.edu/loughranmcdonald-master-dictionary/}{link}.
 
 \hypertarget{regression-based-methods}{%
 \chapter{Regression-Based Methods}\label{regression-based-methods}}

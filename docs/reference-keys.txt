@@ -1,5 +1,8 @@
 introduction
 dictionary-based-methods
+a-stylized-guide
+often-used-dictionaries
+loughran-mcdonald-lm-dictionary
 regression-based-methods
 challenges-of-having-text-as-the-dependent-variable
 distributed-multinomial-regressions-dmr

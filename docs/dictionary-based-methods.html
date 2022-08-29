@@ -18,9 +18,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="A book created with bookdown.">
-<meta property="og:description" content="A book created with bookdown.">
-<meta name="twitter:description" content="A book created with bookdown.">
+<meta name="description" content="We first describe dictionary-based methods, which are by far the most common and least resource-intensive way of conducting textual analysis.  2.1 A Stylized Guide Many papers employing...">
+<meta property="og:description" content="We first describe dictionary-based methods, which are by far the most common and least resource-intensive way of conducting textual analysis.  2.1 A Stylized Guide Many papers employing...">
+<meta name="twitter:description" content="We first describe dictionary-based methods, which are by far the most common and least resource-intensive way of conducting textual analysis.  2.1 A Stylized Guide Many papers employing...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -69,14 +69,52 @@
 <h1>
 <span class="header-section-number">2</span> Dictionary-Based Methods<a class="anchor" aria-label="anchor" href="#dictionary-based-methods"><i class="fas fa-link"></i></a>
 </h1>
+<p>We first describe dictionary-based methods, which are by far the most common and least resource-intensive way of conducting textual analysis.</p>
+<div id="a-stylized-guide" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> A Stylized Guide<a class="anchor" aria-label="anchor" href="#a-stylized-guide"><i class="fas fa-link"></i></a>
+</h2>
+<p>Many papers employing dictionary-based methods follow this cookbook:</p>
+<ol style="list-style-type: decimal">
+<li>What do you want to measure, and why is it important?</li>
+<li>How will you measure what you want to measure? Which corpus will you use? Which dictionary will you use?</li>
+<li>Which economic variables are you interested in explaining with the measurement?</li>
+</ol>
+<p>Many well-known papers follow this format:</p>
+<ul>
+<li>
+<a href="https://academic.oup.com/rfs/article-abstract/34/9/4045/5917640">Cieslak and Vissing-Jorgensen (2021)</a> study the Fed’s attention to the stock market, which is important given its prominent role in the conduct of monetary policy. To measure this object, they use the FOMC documents as corpus and utilize a self-created dictionary of stock market keywords. They then relate the measured attention to the Fed’s interest rate decisions and updates to its growth expectations.</li>
+<li>
+<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3642508">Sautner, Lent, Vilkov, and Zhang (2022)</a> is interested in measuring firm-level exposure to climate change. Given rising climate risk and the accompanying regulator attention, measuring the exposures is of key importance. To measure this object, they use the earnings conference calls as corpus and utilize a dictionary created using a keyword-discovery algorithm. They relate the measured exposures to green technology hiring and patenting as well as prices of options and equity claims.</li>
+<li>
+<a href="https://www.nber.org/papers/w29526">Hassan et al. (2022)</a> seeks to measure country risk as perceived by investors and firms, which is a critical determinant of capital movements across countries. They use earnings conference calls as corpus and use synonyms of risk and uncertainty obtained from Oxford dictionary, library of tone words from Loughran and McDonald (2011), and a self-created dictionary of country-specific keywords. Ultimately, they relate the measured country risk to capital flows and sudden stops, firm-level investment and employment decisions, and fluctuations in exchange rates.</li>
+</ul>
+</div>
+<div id="often-used-dictionaries" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Often-Used Dictionaries<a class="anchor" aria-label="anchor" href="#often-used-dictionaries"><i class="fas fa-link"></i></a>
+</h2>
+<div id="loughran-mcdonald-lm-dictionary" class="section level3" number="2.2.1">
+<h3>
+<span class="header-section-number">2.2.1</span> Loughran-McDonald (LM) Dictionary<a class="anchor" aria-label="anchor" href="#loughran-mcdonald-lm-dictionary"><i class="fas fa-link"></i></a>
+</h3>
+<p>Loughran and McDonald (2011) created six different word lists (negative, positive, uncertainty, litigious, strong modal, and weak modal) by examining word usage in a large sample of 10-Ks during the period 1994–2008. Their dictionary has become predominant in many studies, and papers have used the LM word lists (primarily negative words) to gauge the tone of the business communication. Data can be obtained at this <a href="https://sraf.nd.edu/loughranmcdonald-master-dictionary/">link</a>.</p>
 
+</div>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="index.html"><span class="header-section-number">1</span> Introduction</a></div>
 <div class="next"><a href="regression-based-methods.html"><span class="header-section-number">3</span> Regression-Based Methods</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#dictionary-based-methods"><span class="header-section-number">2</span> Dictionary-Based Methods</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dictionary-based-methods"><span class="header-section-number">2</span> Dictionary-Based Methods</a></li>
+<li><a class="nav-link" href="#a-stylized-guide"><span class="header-section-number">2.1</span> A Stylized Guide</a></li>
+<li>
+<a class="nav-link" href="#often-used-dictionaries"><span class="header-section-number">2.2</span> Often-Used Dictionaries</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#loughran-mcdonald-lm-dictionary"><span class="header-section-number">2.2.1</span> Loughran-McDonald (LM) Dictionary</a></li></ul>
+</li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -92,7 +130,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>NLP Galore</strong>" was written by Various Sources. It was last built on 2022-08-28.</p>
+    <p>"<strong>NLP Galore</strong>" was written by Various Sources. It was last built on 2022-08-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
