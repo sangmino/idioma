@@ -120,7 +120,7 @@
 
 \title{NLP Galore}
 \author{Various Sources}
-\date{2022-08-29}
+\date{2022-09-06}
 
 \begin{document}
 \maketitle
@@ -932,7 +932,7 @@ High-performing RNNs are often multi-layer, ranging from 2 to 4 layers. This is 
 \hypertarget{attention-models-and-transformers}{%
 \chapter{Attention Models and Transformers}\label{attention-models-and-transformers}}
 
-\url{https://www.apronus.com/math/transformer-language-model-definition}
+Transformers are one particular form of the encoder-decoder architecture that uses only attention and does not use RNNs. Main applications are BERT (Bidirectional Encoder Representations from Transformers) and GPT (Generative Pre-Trained Transformer). In this section, we first describe the attention mechanism and then the transformer architecture.
 
 \hypertarget{attention}{%
 \section{Attention}\label{attention}}
@@ -942,41 +942,62 @@ High-performing RNNs are often multi-layer, ranging from 2 to 4 layers. This is 
 
 In the context of language translation, the basic concept of attention is that each time the model predicts an output word, it only pays attention to some input words. Specifically, for each word in the output sentence, it will map the important and relevant words from the input sentence and assign higher weights to these words as shown in the figure below:
 
-\begin{figure}
-\centering
-\includegraphics{Figures/transformers_01.png}
-\caption{image-20220816201407808}
-\end{figure}
-
 In the traditional Seq2Seq model, we discard all the intermediate states of the encoder and use only its final states (vector) to initialize the decoder. The central idea behind attention is not to throw away these intermediate encoder states but to utilize all the states.
 
 \hypertarget{steps-for-computing-attention}{%
 \subsection{Steps for Computing Attention}\label{steps-for-computing-attention}}
 
-\hypertarget{family-of-attention-mechanisms}{%
-\subsection{Family of Attention Mechanisms}\label{family-of-attention-mechanisms}}
+The general attention mechanism makes use of three main components: queries (Q), keys (K), and values (V). It performs the following computations.
 
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  There are different types of attention mechanisms: \url{https://lilianweng.github.io/posts/2018-06-24-attention/}
-\end{itemize}
+  For each query vector \(q\), it is matched against a database of keys to compute a score value for each key. In other words, for each key \(k_i\), the dot product is computed: \(e_{q,k_i} = q\cdot k_i\).
+\item
+  The scores, which are computed for all keys, are then passed through a softmax operation to generate the weights: \(\alpha_{q,k_i} = softmax(e_{q,k_i})\).
+\item
+  The value vector \(v_{k_i}\) , which is paired with a corresponding key, is weighted by the previously computed weights: \(\sum_{i} \alpha_{q,k_i} v_{k_i}\).
+\end{enumerate}
+
+In the context of machine translation, each word in an input sentence would be attributed its own query, key and value vectors. There are three different weight matrices that generate these three vectors. There are also different types of attention mechanisms, which are detailed at \href{https://lilianweng.github.io/posts/2018-06-24-attention/}{this blog}.
 
 \hypertarget{self-attention}{%
 \subsection{Self-Attention}\label{self-attention}}
 
-Self-attention is equivalent to a generalized attention mechanism where the query, key, and values take the same input.
+Self-attention is equivalent to a generalized attention mechanism where the query, key, and values take the same input. This is the attention mechanism used in the transformer architecture. It is an attention mechanism relating different positions of a single sequence in order to compute a representation of the same sequence.
+
+For clarity, suppose the input sequence is ``Today is Monday.''
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  For each token in the input sequence, compute the \texttt{query}, \texttt{key}, and \texttt{value} vectors using the three weight matrices. If the embedding vector size is 5 and the vector size of Q, K, and V is 3, then the weight matrices have the dimension \(5\times 3\).
+\item
+  Compute the attention score using the \texttt{query} and \texttt{key} vector by computing the dot product. For example, if the \texttt{query} word is ``Today'', then one computes the dot product with key vectors for ``Today'', ``Is'', and ``Monday.'' This yields a vector of three numbers, since there are three tokens in the input sequence.
+\item
+  Using the softmax() function, compute the weights. This still has a vector of three numbers that now sum up to 1.
+\item
+  Multiply the weights to the \texttt{value} vector. Since the \texttt{value} vector has dimension \(1\times3\), the resulting output also has the same dimension.
+\end{enumerate}
+
+In sum, when the sequence ``Today is Monday'' is inputted into the self-attention layer as three \(5\times1\) vectors, the output is three \(3\times1\) vectors. In short notation, this is often expressed as:
+\[
+Attention(Q,K,V) = Softmax(QK^\top)V
+\]
+which summarizes the above steps in a simple form.
+
+\textbf{Scaled Dot-Product Attention}
+
+The Transformer implements a scaled dot-product attention. As the name suggests, it first computes a dot product for each query with all of the keys. It subsequently divides each result by \(\sqrt{d_k}\) where \(d_k\) is the dimension of the key vector.
+
+\textbf{Multi-Head Attention}
+
+Multi-head attention simply means that the self-attention is applied repeatedly. Specifically, we not only have one but multiple sets of Query/Key/Value weight matrices, and each of these sets is randomly initialized. Then, after training, each set is used to project the input embeddings (or vectors from lower encoders/decoders) into a different representation subspace.
 
 \hypertarget{transformers}{%
 \section{Transformers}\label{transformers}}
-
-\begin{itemize}
-\tightlist
-\item
-  \url{https://www.lesswrong.com/s/nMGrhBYXWjPhZoyNL/p/McmHduRWJynsjZjx5}
-\item
-  \url{https://jalammar.github.io/illustrated-transformer/}
-\end{itemize}
 
 \hypertarget{overview-1}{%
 \subsection{Overview}\label{overview-1}}
@@ -991,12 +1012,6 @@ input \to encoder \to decoder \to output
 \]
 The encoder and the decoder consist of layers:
 
-\begin{figure}
-\centering
-\includegraphics{Figures/transformers_02.png}
-\caption{image-20220816203617350}
-\end{figure}
-
 \begin{itemize}
 \tightlist
 \item
@@ -1004,12 +1019,6 @@ The encoder and the decoder consist of layers:
 \end{itemize}
 
 Finally, each layer of the encoder and decoder take the following structure:
-
-\begin{figure}
-\centering
-\includegraphics{Figures/transformers_03.png}
-\caption{image-20220816204337867}
-\end{figure}
 
 \begin{itemize}
 \tightlist
@@ -1022,44 +1031,20 @@ Finally, each layer of the encoder and decoder take the following structure:
 \hypertarget{step-1.-embedding}{%
 \subsection{Step 1. Embedding}\label{step-1.-embedding}}
 
-Before the input sentence can be fed into the architecture, it needs to be embedded via (1) word embedding and (2) positional encoding. Obviously, this embedding only happens in the bottom-most encoder.
+Before the input sentence can be fed into the architecture, it needs to be embedded via (1) word embedding and (2) positional encoding. Obviously, this embedding only happens in the bottom-most encoder. Typically, the word embedding is done through a pre-trained neural network instead of a simple one-hot encoding.
 
-\begin{itemize}
-\tightlist
-\item
-  The word embedding is typically done through a pre-trained neural network instead of a simple one-hot encoding.
-\end{itemize}
-
-Positional encoding is also necessary because the transformer architecture does not include a default method for analyzing the order of words in the input sentence. In transformers, each position (index) is mapped to a vector, and hence the output of the positional encoding layer is a matrix where the \(i\)th row is a vector representing the \(i\)th token in the input sequence. This vector is then added to the original word embedding and fed into the very first encoder layer.
-
-\begin{itemize}
-\tightlist
-\item
-  See \href{https://jalammar.github.io/illustrated-transformer/}{this post} for details on the construction of this matrix.
-\end{itemize}
+\textbf{Positional encoding} is also necessary because the transformer architecture does not include a default method for analyzing the order of words in the input sentence. In transformers, each position (index) is mapped to a vector, and hence the output of the positional encoding layer is a matrix where the \(i\)th row is a vector representing the \(i\)th token in the input sequence. This vector is then added to the original word embedding and fed into the very first encoder layer. (See \href{https://jalammar.github.io/illustrated-transformer/}{this post} for details on the construction of this matrix.)
 
 \hypertarget{step-2.-self-attention-in-encoders}{%
 \subsection{Step 2. Self-Attention in Encoders}\label{step-2.-self-attention-in-encoders}}
 
-Self-attention is a layer that helps the encoder look at other words in the input sentence as it encodes a specific word. For example, suppose we are given the following input sentence: ``Simon called Manav because he felt overwhelmed.'' Self-attention allows the model to associate ``he'' with ``Simon'' and not ``Manav.''
+\textbf{Self-attention} is a layer that helps the encoder look at other words in the input sentence as it encodes a specific word. For example, suppose we are given the following input sentence: ``Simon called Manav because he felt overwhelmed.'' Self-attention allows the model to associate ``he'' with ``Simon'' and not ``Manav.''
 
 For each word embedding vector, there is a vector of the attention layer. But we require the entire input sequence (i.e.~the list of words) for computing self-attention because (1) we need it to compute the weights (= normalized scores) and (2) we need to combine the weights with the value vectors, each of which is associated with each word input. \href{https://jalammar.github.io/illustrated-transformer/}{This post} describes the step-by-step process for computing self-attention very nicely, which is summarized below:
 
-\begin{figure}
-\centering
-\includegraphics{Figures/transformers_04.png}
-\caption{image-20220816214440095}
-\end{figure}
-
 \textbf{Step 1. Create Query, Key, and Value vectors}
 
-The first step is to create, for each word, a Query vector, a Key vector, and a Value vector. These vectors are created by multiplying the embedding by three matrices that trained during the training process.
-
-\begin{itemize}
-\tightlist
-\item
-  Note that typically these new vectors are smaller in dimension than the embedding vector.
-\end{itemize}
+The first step is to create, for each word, a Query vector, a Key vector, and a Value vector. These vectors are created by multiplying the embedding by three matrices that trained during the training process. Note that typically these new vectors are smaller in dimension than the embedding vector.
 
 \textbf{Step 2. Compute the Score}
 
@@ -1073,8 +1058,6 @@ The scores are divided by \(\sqrt{d}\) where \(d\) is the dimension of the key v
 
 Each value vector is multiplied by the softmax score and then the weighted value vectors are summed to produce the output of the self-attention layer.
 
-\textbf{Note: Multi-headed Attention}
-
 \hypertarget{step-3.-self-attention-in-decoders}{%
 \subsection{Step 3. Self-Attention in Decoders}\label{step-3.-self-attention-in-decoders}}
 
@@ -1084,6 +1067,18 @@ Similarly as before, the decoder passes its input into a multi-head self-attenti
 \subsection{Step 4. Encoder-Decoder Attention in Decoders}\label{step-4.-encoder-decoder-attention-in-decoders}}
 
 This additional layer works like self-attention except that it combines two sources of inputs: the self-attention layer below it as well as the output of the encoder stack. \textbf{Importantly, the output from the encoder stack is passed to the value and key parameters, while the output of the self-attention module is passed to the query parameter.}
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \href{https://www.apronus.com/math/transformer-language-model-definition}{This post} describes the mathematics behind the attention mechanism.
+\item
+  \href{https://www.lesswrong.com/s/nMGrhBYXWjPhZoyNL/p/McmHduRWJynsjZjx5}{This post} describes the Transformer architecture in a simplified form, and \href{https://jalammar.github.io/illustrated-transformer/}{this post} provides a nice illustration of how transformers work.
+\end{enumerate}
 
 \hypertarget{pretrained-models-and-fine-tuning}{%
 \chapter{Pretrained Models and Fine-Tuning}\label{pretrained-models-and-fine-tuning}}

@@ -18,9 +18,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="https://www.apronus.com/math/transformer-language-model-definition  8.1 Attention  8.1.1 Basic Idea In the context of language translation, the basic concept of attention is that each time the...">
-<meta property="og:description" content="https://www.apronus.com/math/transformer-language-model-definition  8.1 Attention  8.1.1 Basic Idea In the context of language translation, the basic concept of attention is that each time the...">
-<meta name="twitter:description" content="https://www.apronus.com/math/transformer-language-model-definition  8.1 Attention  8.1.1 Basic Idea In the context of language translation, the basic concept of attention is that each time the...">
+<meta name="description" content="Transformers are one particular form of the encoder-decoder architecture that uses only attention and does not use RNNs. Main applications are BERT (Bidirectional Encoder Representations from...">
+<meta property="og:description" content="Transformers are one particular form of the encoder-decoder architecture that uses only attention and does not use RNNs. Main applications are BERT (Bidirectional Encoder Representations from...">
+<meta name="twitter:description" content="Transformers are one particular form of the encoder-decoder architecture that uses only attention and does not use RNNs. Main applications are BERT (Bidirectional Encoder Representations from...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -69,7 +69,7 @@
 <h1>
 <span class="header-section-number">8</span> Attention Models and Transformers<a class="anchor" aria-label="anchor" href="#attention-models-and-transformers"><i class="fas fa-link"></i></a>
 </h1>
-<p><a href="https://www.apronus.com/math/transformer-language-model-definition" class="uri">https://www.apronus.com/math/transformer-language-model-definition</a></p>
+<p>Transformers are one particular form of the encoder-decoder architecture that uses only attention and does not use RNNs. Main applications are BERT (Bidirectional Encoder Representations from Transformers) and GPT (Generative Pre-Trained Transformer). In this section, we first describe the attention mechanism and then the transformer architecture.</p>
 <div id="attention" class="section level2" number="8.1">
 <h2>
 <span class="header-section-number">8.1</span> Attention<a class="anchor" aria-label="anchor" href="#attention"><i class="fas fa-link"></i></a>
@@ -79,40 +79,48 @@
 <span class="header-section-number">8.1.1</span> Basic Idea<a class="anchor" aria-label="anchor" href="#basic-idea"><i class="fas fa-link"></i></a>
 </h3>
 <p>In the context of language translation, the basic concept of attention is that each time the model predicts an output word, it only pays attention to some input words. Specifically, for each word in the output sentence, it will map the important and relevant words from the input sentence and assign higher weights to these words as shown in the figure below:</p>
-<div class="figure">
-<img src="Figures/transformers_01.png" alt=""><p class="caption">image-20220816201407808</p>
-</div>
+<div class="inline-figure"><img src="Figures/transformers_01.png" alt="image-20220816201407808" style="zoom: 67%;"></div>
 <p>In the traditional Seq2Seq model, we discard all the intermediate states of the encoder and use only its final states (vector) to initialize the decoder. The central idea behind attention is not to throw away these intermediate encoder states but to utilize all the states.</p>
 </div>
 <div id="steps-for-computing-attention" class="section level3" number="8.1.2">
 <h3>
 <span class="header-section-number">8.1.2</span> Steps for Computing Attention<a class="anchor" aria-label="anchor" href="#steps-for-computing-attention"><i class="fas fa-link"></i></a>
 </h3>
+<p>The general attention mechanism makes use of three main components: queries (Q), keys (K), and values (V). It performs the following computations.</p>
+<ol style="list-style-type: decimal">
+<li>For each query vector <span class="math inline">\(q\)</span>, it is matched against a database of keys to compute a score value for each key. In other words, for each key <span class="math inline">\(k_i\)</span>, the dot product is computed: <span class="math inline">\(e_{q,k_i} = q\cdot k_i\)</span>.</li>
+<li>The scores, which are computed for all keys, are then passed through a softmax operation to generate the weights: <span class="math inline">\(\alpha_{q,k_i} = softmax(e_{q,k_i})\)</span>.</li>
+<li>The value vector <span class="math inline">\(v_{k_i}\)</span> , which is paired with a corresponding key, is weighted by the previously computed weights: <span class="math inline">\(\sum_{i} \alpha_{q,k_i} v_{k_i}\)</span>.</li>
+</ol>
+<p>In the context of machine translation, each word in an input sentence would be attributed its own query, key and value vectors. There are three different weight matrices that generate these three vectors. There are also different types of attention mechanisms, which are detailed at <a href="https://lilianweng.github.io/posts/2018-06-24-attention/">this blog</a>.</p>
 </div>
-<div id="family-of-attention-mechanisms" class="section level3" number="8.1.3">
+<div id="self-attention" class="section level3" number="8.1.3">
 <h3>
-<span class="header-section-number">8.1.3</span> Family of Attention Mechanisms<a class="anchor" aria-label="anchor" href="#family-of-attention-mechanisms"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.1.3</span> Self-Attention<a class="anchor" aria-label="anchor" href="#self-attention"><i class="fas fa-link"></i></a>
 </h3>
-<ul>
-<li>There are different types of attention mechanisms: <a href="https://lilianweng.github.io/posts/2018-06-24-attention/" class="uri">https://lilianweng.github.io/posts/2018-06-24-attention/</a>
-</li>
-</ul>
-</div>
-<div id="self-attention" class="section level3" number="8.1.4">
-<h3>
-<span class="header-section-number">8.1.4</span> Self-Attention<a class="anchor" aria-label="anchor" href="#self-attention"><i class="fas fa-link"></i></a>
-</h3>
-<p>Self-attention is equivalent to a generalized attention mechanism where the query, key, and values take the same input.</p>
+<p>Self-attention is equivalent to a generalized attention mechanism where the query, key, and values take the same input. This is the attention mechanism used in the transformer architecture. It is an attention mechanism relating different positions of a single sequence in order to compute a representation of the same sequence.</p>
+<p>For clarity, suppose the input sequence is “Today is Monday.”</p>
+<ol style="list-style-type: decimal">
+<li>For each token in the input sequence, compute the <code>query</code>, <code>key</code>, and <code>value</code> vectors using the three weight matrices. If the embedding vector size is 5 and the vector size of Q, K, and V is 3, then the weight matrices have the dimension <span class="math inline">\(5\times 3\)</span>.</li>
+<li>Compute the attention score using the <code>query</code> and <code>key</code> vector by computing the dot product. For example, if the <code>query</code> word is “Today”, then one computes the dot product with key vectors for “Today”, “Is”, and “Monday.” This yields a vector of three numbers, since there are three tokens in the input sequence.</li>
+<li>Using the softmax() function, compute the weights. This still has a vector of three numbers that now sum up to 1.</li>
+<li>Multiply the weights to the <code>value</code> vector. Since the <code>value</code> vector has dimension <span class="math inline">\(1\times3\)</span>, the resulting output also has the same dimension.</li>
+</ol>
+<p>In sum, when the sequence “Today is Monday” is inputted into the self-attention layer as three <span class="math inline">\(5\times1\)</span> vectors, the output is three <span class="math inline">\(3\times1\)</span> vectors. In short notation, this is often expressed as:
+<span class="math display">\[
+Attention(Q,K,V) = Softmax(QK^\top)V
+\]</span>
+which summarizes the above steps in a simple form.</p>
+<p><strong>Scaled Dot-Product Attention</strong></p>
+<p>The Transformer implements a scaled dot-product attention. As the name suggests, it first computes a dot product for each query with all of the keys. It subsequently divides each result by <span class="math inline">\(\sqrt{d_k}\)</span> where <span class="math inline">\(d_k\)</span> is the dimension of the key vector.</p>
+<p><strong>Multi-Head Attention</strong></p>
+<p>Multi-head attention simply means that the self-attention is applied repeatedly. Specifically, we not only have one but multiple sets of Query/Key/Value weight matrices, and each of these sets is randomly initialized. Then, after training, each set is used to project the input embeddings (or vectors from lower encoders/decoders) into a different representation subspace.</p>
 </div>
 </div>
 <div id="transformers" class="section level2" number="8.2">
 <h2>
 <span class="header-section-number">8.2</span> Transformers<a class="anchor" aria-label="anchor" href="#transformers"><i class="fas fa-link"></i></a>
 </h2>
-<ul>
-<li><a href="https://www.lesswrong.com/s/nMGrhBYXWjPhZoyNL/p/McmHduRWJynsjZjx5" class="uri">https://www.lesswrong.com/s/nMGrhBYXWjPhZoyNL/p/McmHduRWJynsjZjx5</a></li>
-<li><a href="https://jalammar.github.io/illustrated-transformer/" class="uri">https://jalammar.github.io/illustrated-transformer/</a></li>
-</ul>
 <div id="overview-1" class="section level3" number="8.2.1">
 <h3>
 <span class="header-section-number">8.2.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-1"><i class="fas fa-link"></i></a>
@@ -126,16 +134,12 @@ The transformer consists of an encoder and a decoder:
 input \to encoder \to decoder \to output
 \]</span>
 The encoder and the decoder consist of layers:</p>
-<div class="figure">
-<img src="Figures/transformers_02.png" alt=""><p class="caption">image-20220816203617350</p>
-</div>
+<div class="inline-figure"><img src="Figures/transformers_02.png" alt="image-20220816204337867" style="zoom:50%;"></div>
 <ul>
 <li>Notice that the sublayers are stacked linearly for both the encoder and the decoder, but the decoder takes an additional input: the output from the last encoder sub-layer.</li>
 </ul>
 <p>Finally, each layer of the encoder and decoder take the following structure:</p>
-<div class="figure">
-<img src="Figures/transformers_03.png" alt=""><p class="caption">image-20220816204337867</p>
-</div>
+<div class="inline-figure"><img src="Figures/transformers_03.png" alt="image-20220816204337867" style="zoom:50%;"></div>
 <ul>
 <li>The encoder layer computes the self-attention and then feeds it into the feed-forward network.</li>
 <li>The decoder layer is identical to the encoder layer with additional middle step: the encoder-decoder attention, which uses the information carried over from the last step of the encoder.</li>
@@ -145,36 +149,24 @@ The encoder and the decoder consist of layers:</p>
 <h3>
 <span class="header-section-number">8.2.2</span> Step 1. Embedding<a class="anchor" aria-label="anchor" href="#step-1.-embedding"><i class="fas fa-link"></i></a>
 </h3>
-<p>Before the input sentence can be fed into the architecture, it needs to be embedded via (1) word embedding and (2) positional encoding. Obviously, this embedding only happens in the bottom-most encoder.</p>
-<ul>
-<li>The word embedding is typically done through a pre-trained neural network instead of a simple one-hot encoding.</li>
-</ul>
-<p>Positional encoding is also necessary because the transformer architecture does not include a default method for analyzing the order of words in the input sentence. In transformers, each position (index) is mapped to a vector, and hence the output of the positional encoding layer is a matrix where the <span class="math inline">\(i\)</span>th row is a vector representing the <span class="math inline">\(i\)</span>th token in the input sequence. This vector is then added to the original word embedding and fed into the very first encoder layer.</p>
-<ul>
-<li>See <a href="https://jalammar.github.io/illustrated-transformer/">this post</a> for details on the construction of this matrix.</li>
-</ul>
+<p>Before the input sentence can be fed into the architecture, it needs to be embedded via (1) word embedding and (2) positional encoding. Obviously, this embedding only happens in the bottom-most encoder. Typically, the word embedding is done through a pre-trained neural network instead of a simple one-hot encoding.</p>
+<p><strong>Positional encoding</strong> is also necessary because the transformer architecture does not include a default method for analyzing the order of words in the input sentence. In transformers, each position (index) is mapped to a vector, and hence the output of the positional encoding layer is a matrix where the <span class="math inline">\(i\)</span>th row is a vector representing the <span class="math inline">\(i\)</span>th token in the input sequence. This vector is then added to the original word embedding and fed into the very first encoder layer. (See <a href="https://jalammar.github.io/illustrated-transformer/">this post</a> for details on the construction of this matrix.)</p>
 </div>
 <div id="step-2.-self-attention-in-encoders" class="section level3" number="8.2.3">
 <h3>
 <span class="header-section-number">8.2.3</span> Step 2. Self-Attention in Encoders<a class="anchor" aria-label="anchor" href="#step-2.-self-attention-in-encoders"><i class="fas fa-link"></i></a>
 </h3>
-<p>Self-attention is a layer that helps the encoder look at other words in the input sentence as it encodes a specific word. For example, suppose we are given the following input sentence: “Simon called Manav because he felt overwhelmed.” Self-attention allows the model to associate “he” with “Simon” and not “Manav.”</p>
+<p><strong>Self-attention</strong> is a layer that helps the encoder look at other words in the input sentence as it encodes a specific word. For example, suppose we are given the following input sentence: “Simon called Manav because he felt overwhelmed.” Self-attention allows the model to associate “he” with “Simon” and not “Manav.”</p>
 <p>For each word embedding vector, there is a vector of the attention layer. But we require the entire input sequence (i.e. the list of words) for computing self-attention because (1) we need it to compute the weights (= normalized scores) and (2) we need to combine the weights with the value vectors, each of which is associated with each word input. <a href="https://jalammar.github.io/illustrated-transformer/">This post</a> describes the step-by-step process for computing self-attention very nicely, which is summarized below:</p>
-<div class="figure">
-<img src="Figures/transformers_04.png" alt=""><p class="caption">image-20220816214440095</p>
-</div>
+<div class="inline-figure"><img src="Figures/transformers_04.png" alt="image-20220816214440095" style="zoom:50%;"></div>
 <p><strong>Step 1. Create Query, Key, and Value vectors</strong></p>
-<p>The first step is to create, for each word, a Query vector, a Key vector, and a Value vector. These vectors are created by multiplying the embedding by three matrices that trained during the training process.</p>
-<ul>
-<li>Note that typically these new vectors are smaller in dimension than the embedding vector.</li>
-</ul>
+<p>The first step is to create, for each word, a Query vector, a Key vector, and a Value vector. These vectors are created by multiplying the embedding by three matrices that trained during the training process. Note that typically these new vectors are smaller in dimension than the embedding vector.</p>
 <p><strong>Step 2. Compute the Score</strong></p>
 <p>For each word, the score is is calculated by taking the dot product of the query vector with the key vector of the respective word. So for the word in position <span class="math inline">\(i\)</span>, the first score would be the dot product of <span class="math inline">\(q_i\)</span> and <span class="math inline">\(k_1\)</span> and the second score would be the dot product of <span class="math inline">\(q_i\)</span> and <span class="math inline">\(k_2\)</span>.</p>
 <p><strong>Step 3. Convert the Scores to Weights</strong></p>
 <p>The scores are divided by <span class="math inline">\(\sqrt{d}\)</span> where <span class="math inline">\(d\)</span> is the dimension of the key vectors, which is intended to lead to more stable gradients. Then they are passed through a softmax operation so that the scores are converted to weights. The resulting softmax score determines how much each word will be expressed at this position.</p>
 <p><strong>Step 4. Construct the self attention layer</strong></p>
 <p>Each value vector is multiplied by the softmax score and then the weighted value vectors are summed to produce the output of the self-attention layer.</p>
-<p><strong>Note: Multi-headed Attention</strong></p>
 </div>
 <div id="step-3.-self-attention-in-decoders" class="section level3" number="8.2.4">
 <h3>
@@ -187,8 +179,18 @@ The encoder and the decoder consist of layers:</p>
 <span class="header-section-number">8.2.5</span> Step 4. Encoder-Decoder Attention in Decoders<a class="anchor" aria-label="anchor" href="#step-4.-encoder-decoder-attention-in-decoders"><i class="fas fa-link"></i></a>
 </h3>
 <p>This additional layer works like self-attention except that it combines two sources of inputs: the self-attention layer below it as well as the output of the encoder stack. <strong>Importantly, the output from the encoder stack is passed to the value and key parameters, while the output of the self-attention module is passed to the query parameter.</strong></p>
-
 </div>
+</div>
+<div id="references" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> References<a class="anchor" aria-label="anchor" href="#references"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>
+<a href="https://www.apronus.com/math/transformer-language-model-definition">This post</a> describes the mathematics behind the attention mechanism.</li>
+<li>
+<a href="https://www.lesswrong.com/s/nMGrhBYXWjPhZoyNL/p/McmHduRWJynsjZjx5">This post</a> describes the Transformer architecture in a simplified form, and <a href="https://jalammar.github.io/illustrated-transformer/">this post</a> provides a nice illustration of how transformers work.</li>
+</ol>
 </div>
 </div>
   <div class="chapter-nav">
@@ -202,8 +204,7 @@ The encoder and the decoder consist of layers:</p>
 <a class="nav-link" href="#attention"><span class="header-section-number">8.1</span> Attention</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#basic-idea"><span class="header-section-number">8.1.1</span> Basic Idea</a></li>
 <li><a class="nav-link" href="#steps-for-computing-attention"><span class="header-section-number">8.1.2</span> Steps for Computing Attention</a></li>
-<li><a class="nav-link" href="#family-of-attention-mechanisms"><span class="header-section-number">8.1.3</span> Family of Attention Mechanisms</a></li>
-<li><a class="nav-link" href="#self-attention"><span class="header-section-number">8.1.4</span> Self-Attention</a></li>
+<li><a class="nav-link" href="#self-attention"><span class="header-section-number">8.1.3</span> Self-Attention</a></li>
 </ul>
 </li>
 <li>
@@ -215,6 +216,7 @@ The encoder and the decoder consist of layers:</p>
 <li><a class="nav-link" href="#step-4.-encoder-decoder-attention-in-decoders"><span class="header-section-number">8.2.5</span> Step 4. Encoder-Decoder Attention in Decoders</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#references"><span class="header-section-number">8.3</span> References</a></li>
 </ul>
 
       <div class="book-extra">
@@ -231,7 +233,7 @@ The encoder and the decoder consist of layers:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>NLP Galore</strong>" was written by Various Sources. It was last built on 2022-08-29.</p>
+    <p>"<strong>NLP Galore</strong>" was written by Various Sources. It was last built on 2022-09-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

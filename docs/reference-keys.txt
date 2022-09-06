@@ -56,7 +56,6 @@ attention-models-and-transformers
 attention
 basic-idea
 steps-for-computing-attention
-family-of-attention-mechanisms
 self-attention
 transformers
 overview-1
@@ -64,6 +63,7 @@ step-1.-embedding
 step-2.-self-attention-in-encoders
 step-3.-self-attention-in-decoders
 step-4.-encoder-decoder-attention-in-decoders
+references
 pretrained-models-and-fine-tuning
 bert
 gpt
